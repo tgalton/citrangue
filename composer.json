@@ -1,0 +1,19 @@
+{
+    "name": "galto/citrangue21-03",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Services\\": "ressources/"
+            
+        }
+    },
+    "authors": [
+        {
+            "name": "tgalton",
+            "email": "galtontom@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/var-dumper": "^6.0"
+    }
+}

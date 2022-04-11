@@ -1,0 +1,6 @@
+DirectoryIndex public/index.php 
+#activer la réecriture
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ public/index.php?url=$1 [L,QSA]

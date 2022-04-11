@@ -1,0 +1,32 @@
+<!DOCTYPE phtml>
+<html lang="fr">
+
+    <body>
+        <form method="POST">
+            <div class="container">    
+                <h1>Inscription</h1>
+                        
+                <label><b>Adresse mail</b></label>
+                <input type="text" placeholder="Entrez votre mail" name="usermail" required>
+
+                <label><b>Pseudo</b></label>
+                <input type="text" placeholder="Entrez votre pseudo" name="username" required>
+
+                <label><b>Mot-de-passe</b></label>
+                <input type="password" placeholder="Entrer le mot de passe" name="userpwr" required>
+
+                <label><b>Répéter votre mot-de-passe</b></label>
+                <input type="password" placeholder="Entrer le mot de passe" name="userpwrverif" required>
+
+                <label for="agree">
+                <input type="checkbox" name="agree" id="agree" value="yes"/> Je suis d'accord avec
+                <a href="#" title="term of services">les règles d'utilisation</a>
+                </label>
+
+                <input type="submit" id='registerbtn' name='registerbtn' class="registerbtn" value="S'incrire" >
+
+                <footer>Already a member? <a href="index.php?url=connexion">Login here</a></footer>
+            </div>
+        </form>
+    </body>
+</html>
