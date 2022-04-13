@@ -4,10 +4,8 @@ use Services\AllClass\Registratorus;
 
 $registratorus = new Registratorus;
 
-
-
+// *** Data user ***
 if (isset($_POST['registerbtn'])){
-    var_dump("Controller is working");
     $registratorus-> registrationVerificationOrchestrator(
         $_POST["usermail"],
         $_POST["userpwd"], 
@@ -15,5 +13,11 @@ if (isset($_POST['registerbtn'])){
         $_POST["userpseudo"]
     );
 }
+
+// *** Errors registration ****
+$errorGeneral = $registratorus -> registrationsErrors["general"];
+$errorPseudo = $registratorus -> registrationsErrors["pseudo"];
+$errorPwd = $registratorus -> registrationsErrors["pwd"];
+$errorPwdCheck = $registratorus -> registrationsErrors["pwdCheck"];
 
 require_once "../app/views/registration.phtml";

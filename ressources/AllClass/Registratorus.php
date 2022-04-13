@@ -8,7 +8,10 @@ use Services\AllClass\DataFinder;
 class Registratorus {
     // $registrationsErrors save errors that should appear.
     public $registrationsErrors = [
-        "general" => NULL
+        "general" => NULL,
+        "pseudo" => NULL,
+        "pwd" => NULL,
+        "pwdCheck" => NULL
     ];
 
     // $resultReturned save the result at each step of verification
@@ -16,7 +19,10 @@ class Registratorus {
     // otherwise it is false and we don't push the new user into database.
     public $resultReturned = TRUE;
 
-
+    // Declaration of all the regex patterns
+    CONST patternMail = '/^\S+@\S+\.\S+$/';
+    CONST patternPwd = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/';
+    CONST patternPseudo = '/^[\w\d\-]{1,45}$/';
 
 
     public function registrationVerificationOrchestrator(
@@ -29,19 +35,25 @@ class Registratorus {
     //  push them to the next step -> database.
     {
         // We verify if all the field are completed.
-        // if(!isset($userPseudo, $$userMdp, $userPwrVerif, $userMail))
-        // {
-        //   $registrationsErrors["general"] = "Les champs ne sont pas tous complets" ;
-        // }
+        if(empty($userMail) || empty($userPwd) || empty($userPwdCheck) || empty($userPseudo)) {
+            // if all the field are not completed, we save an error.
+            $this -> registrationsErrors["general"] = "Les champs ne sont pas tous complets" ;
+            // and turn $resultReturned into false.
+            $this -> resultReturned = FALSE;
+        };
 
-        // $resultReturned = if($resultReturned === TRUE && $this->pseudoVerificator();
-        // if all the field are not completed, we save an error
-        // and turn $resultReturned into false.
-        var_dump("Orchestrator in work");
+        // If $resultReturned is True, pseudoVerication is OK, $resultReturned still True
+        $resultReturned = $this->pseudoVerificator() && $resultReturned ;
+        
+        
+        // If $resultReturned = FALSE, don't push.
+        if($this -> resultReturned){
         $this-> loadPushNewUser($userPseudo, $userMail, $userPwd);
+        }
     }
     public function pseudoVerificator()
-    {  
+    {
+        return TRUE;
     }
     public function mdpVerificator()
     {
