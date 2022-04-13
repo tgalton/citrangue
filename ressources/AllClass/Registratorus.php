@@ -10,6 +10,7 @@ class Registratorus {
     public $registrationsErrors = [
         "general" => NULL
     ];
+
     // $resultReturned save the result at each step of verification
     // if all the revification return true, $resultReturned is true
     // otherwise it is false and we don't push the new user into database.
@@ -19,45 +20,28 @@ class Registratorus {
 
 
     public function registrationVerificationOrchestrator(
-        $userPseudo,
-        $userMdp,
-        $userPwrVerif,
-        $userMail
+        $userMail,
+        $userPwd,
+        $userPwdCheck,
+        $userPseudo
     )
     // This function will lead the verification of input and, if they are correct
     //  push them to the next step -> database.
     {
         // We verify if all the field are completed.
-        if(!isset($userPseudo, $$userMdp, $userPwrVerif, $userMail)){
-          $registrationsErrors["general"] = "Les champs ne sont pas tous complets" ;
-        }
+        // if(!isset($userPseudo, $$userMdp, $userPwrVerif, $userMail))
+        // {
+        //   $registrationsErrors["general"] = "Les champs ne sont pas tous complets" ;
+        // }
 
         // $resultReturned = if($resultReturned === TRUE && $this->pseudoVerificator();
         // if all the field are not completed, we save an error
         // and turn $resultReturned into false.
-        $this-> loadPushNewUser($userName, $userMail, $userMdp);
+        var_dump("Orchestrator in work");
+        $this-> loadPushNewUser($userPseudo, $userMail, $userPwd);
     }
     public function pseudoVerificator()
-    {
-        // ** Verification of pseudo
-        // TODO : faire ça avec un match
-        // If pseudo is not define, the script stop and return an error.
-        if(empty($_POST['pseudo']))
-        {
-            echo "Le pseudo n'est pas renseigné.";
-        }
-        // Stop and return error if pseudo contain specials char.
-        elseif(!preg_match("^([a-zA-Z0-9-_]{2,36})$", $pseudo,$_POST['pseudo']))
-        {
-            echo "Le pseudo ne doit pas comprendre de caractères spéciaux";
-        }
-        // Stop and return error if pseudo is too long
-        elseif(strlen($_POST['pseudo'])>40)
-        {
-            echo "Le pseudo ne doit pas faire plus de 40 caractères";
-        }
-
-        
+    {  
     }
     public function mdpVerificator()
     {
