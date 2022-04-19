@@ -33,10 +33,30 @@ class DataFinder {
         }
     }
 
-    public function thisPseudoAlreadyExist($pseudo)
+    public function isThisPseudoAlreadyExist($pseudo)
     {
-        $stmt = $this -> PDO -> prepare("SELECT id FROM Users where Userscol = ?");
-        $stmt -> execute($pseudo);
+        $co = $this -> pdo; 
+        $stmt = $co -> prepare("SELECT user_id FROM Users where user_name = :pseudo");
+        $stmt -> execute([
+            ":pseudo" => $pseudo
+        ]);
+        if(($stmt -> rowCount())>0)
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    public function isThisMailAlreadyExist($mail)
+    {
+        $co = $this -> pdo; 
+        $stmt = $co -> prepare("SELECT user_id FROM Users where user_mail = :mail");
+        $stmt -> execute([
+            ":mail" => $mail
+        ]);
         if(($stmt -> rowCount())>0)
         {
             return TRUE;

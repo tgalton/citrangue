@@ -11,7 +11,8 @@ class Registratorus {
         "general" => NULL,
         "pseudo" => NULL,
         "pwd" => NULL,
-        "pwdCheck" => NULL
+        "pwdCheck" => NULL,
+        "mail" => NULL
     ];
 
     // $resultReturned save the result at each step of verification
@@ -20,9 +21,9 @@ class Registratorus {
     public $resultReturned = TRUE;
 
     // Declaration of all the regex patterns
-    CONST patternMail = '/^\S+@\S+\.\S+$/';
-    CONST patternPwd = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/';
-    CONST patternPseudo = '/^[\w\d\-]{1,45}$/';
+    public CONST PATTERN_MAIL = '/^\S+@\S+\.\S+$/';
+    public CONST PATTERN_PWD = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/';
+    public CONST PATTERN_PSEUDO = '/^[\w\d\-]{1,45}$/';
 
 
     public function registrationVerificationOrchestrator(
@@ -42,8 +43,15 @@ class Registratorus {
             $this -> resultReturned = FALSE;
         };
 
+        // Instanciate dataFinder to check later if Pseudo and Mail already exist into database.
+        $dataFinder = new DataFinder();
+
         // If $resultReturned is True, pseudoVerication is OK, $resultReturned still True
-        $resultReturned = $this->pseudoVerificator() && $resultReturned ;
+        $this->resultReturned = $this->pseudoVerificator($userPseudo) && $this->resultReturned ;
+        // Same here with pwd
+        $this->resultReturned = $this->pwdVerificator($userPwd) && $this->resultReturned ;
+        // Same here with pwdCheck
+        $this->resultReturned = $this->pwdCheckVerificator($userPwd, $userPwdCheck) && $this->resultReturned ;
         
         
         // If $resultReturned = FALSE, don't push.
@@ -51,24 +59,73 @@ class Registratorus {
         $this-> loadPushNewUser($userPseudo, $userMail, $userPwd);
         }
     }
-    public function pseudoVerificator()
+
+    public function pseudoVerificator($userPseudo)
     {
-        return TRUE;
+        // If match is okay and userPseudo don't exist already, return TRUE; else return FALSE
+        // and save the correct error message.
+        $dataFinder = new DataFinder();
+        if(preg_match(self::PATTERN_PSEUDO, $userPseudo)){
+            if($dataFinder -> isThisPseudoAlreadyExist($userPseudo)){
+                $this -> registrationsErrors["pseudo"] = "Ce pseudo existe déjà";
+                return FALSE;
+            } else {
+                return TRUE;
+            }
+        } else {
+            $this -> registrationsErrors["pseudo"] = "Votre pseudo ne doit pas contenir .!@#$%^&* ";
+            return FALSE;
+        };
+        
     }
-    public function mdpVerificator()
+
+    public function pwdVerificator($userPwd)
     {
-        // ** Verification of mdp
-        // If mdp is undefined, the script stop and return an error
+        if(preg_match(self::PATTERN_PWD, $userPwd)){
+            return TRUE;
+        } else {
+            $this -> registrationsErrors["pwd"] = "Votre mot de passe doit faire au moins 8 charactères et posséder un chiffre, une majuscule et un charactère spécial. Nous vous recommendons d'utiliser une phrase.";
+            return FALSE;
+        };
+
 
     }
-    public function mailVerificator()
+
+    public function pwdCheckVerificator($userPwd, $userPwdCheck)
     {
+        if($userPwd === $userPwdCheck){
+            return TRUE;
+        } else {
+            $this -> registrationsErrors["pwdCheck"] = "Vous devez répéter le même mot de passe.";
+            return FALSE;
+        };      
     }
+
+    public function mailVerificator($userMail)
+    {
+        // If the mail inserted have the correct pattern and don't already exist in the users database, return TRUE. 
+        if (preg_match(self::PATTERN_MAIL, $userMail)){
+            if($dataFinder -> isThisMailAlreadyExist($userMail)){
+                return TRUE;
+            } else {
+                $this -> registrationsErrors["mail"] = "Ce mail est déjà utilisé";
+                return FALSE;
+            }
+        } else {
+            $this -> registrationsErrors["mail"] = "Veuillez utiliser un mail valide";
+            return FALSE;
+        }
+    }
+
     // pushNewUser : this method is call from registrationController
     public function loadPushNewUser($userName, $userMail, $userMdp)
     {
+        $options = [
+            'cost' => 12,
+        ];
+        $userMdpHashed = password_hash($userMdp, PASSWORD_BCRYPT, $options);
         // On utilise la méthode push est présente dans la class datafinder.
         $dataFinder = new DataFinder();
-        $dataFinder -> pushNewUser($userName, $userMail, $userMdp);
+        $dataFinder -> pushNewUser($userName, $userMail, $userMdpHashed);
     }
 }
