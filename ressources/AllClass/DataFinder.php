@@ -36,7 +36,7 @@ class DataFinder {
     public function isThisPseudoAlreadyExist($pseudo)
     {
         $co = $this -> pdo; 
-        $stmt = $co -> prepare("SELECT user_id FROM Users where user_name = :pseudo");
+        $stmt = $co -> prepare("SELECT user_id FROM Users WHERE user_name = :pseudo");
         $stmt -> execute([
             ":pseudo" => $pseudo
         ]);
@@ -51,19 +51,28 @@ class DataFinder {
     }
 
     public function isThisMailAlreadyExist($mail)
+    // If this mail exist in the database Users, return TRUE, else return FALSE
     {
         $co = $this -> pdo; 
-        $stmt = $co -> prepare("SELECT user_id FROM Users where user_mail = :mail");
+        $stmt = $co -> prepare("SELECT user_id FROM Users WHERE mail_adress = :mail");
         $stmt -> execute([
             ":mail" => $mail
         ]);
-        if(($stmt -> rowCount())>0)
+        // $stmt -> bindValue(':mail', $mail);
+        // var_dump($stmt -> fetchAll());
+        $user = $stmt -> rowCount();
+        var_dump($user);
+
+
+        if($user>0)
         {
             return TRUE;
+            var_dump("Le mail existe");
         }
         else
         {
             return FALSE;
+            var_dump("Le mail n'existe pas");
         }
     }
 
@@ -80,11 +89,13 @@ class DataFinder {
             ":user_name" => $userName,
             ":mail_adress" => $userMail,
             ":user_mdp" => $userMdp,
+            // Just set french now
             ":language_id" => 1
             
         ]);
     }
     
+    // TODO : Warning : Currently not working or used
     public function findAllUsers()
     {
         $stmt = $this->pdo -> prepare("SELECT * FROM Users");
@@ -92,5 +103,17 @@ class DataFinder {
         foreach ($stmt as $row) {
             print_r($row);
         }
+    }
+
+    
+    // We want a method to find anything by id and table name.
+    public function findUserByMail($userMail)
+    {
+        $co = $this -> pdo; 
+        $stmt = $co -> prepare("SELECT user_id, user_mdp FROM Users where mail_adress = :mail");
+        $stmt -> execute([
+            ":mail" => $userMail
+        ]);
+        return $stmt;
     }
 }

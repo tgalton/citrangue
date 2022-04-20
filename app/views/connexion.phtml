@@ -2,15 +2,37 @@
 <div id="container">
                 <!-- zone de connexion -->
                 
-    <form action="verification.php" method="POST">
-        <h1>Connexion</h1>
-                    
-        <label><b>Adresse mail</b></label>
-        <input type="text" placeholder="Entrez votre mail" name="usermail" required>
+                <!DOCTYPE phtml>
+<html lang="fr">
 
-        <label><b>Mot de passe</b></label>
-        <input type="password" placeholder="Entrer le mot de passe" name="password" required>
+    <body>
+        <form  method="POST">
+            <div class="container">    
+                
+                <h1>Connexion</h1>
+                
+                <?php if($errorGeneral != NULL):?>
+                    <p class=errorMsg><?=$errorGeneral?></p>
+                <?php endif;?>
 
-        <input type="submit" id='submit' value='LOGIN' >
-    </form>
+                <?php if($errorMail != NULL):?>
+                    <p class=errorMsg><?=$errorMail?></p>
+                <?php endif;?>
+                <label><b>Adresse mail</b></label>
+                <input type="text" placeholder="Entrez votre mail" id="usermail" name="usermail" required>
+
+                <?php if($errorPwd != NULL):?>
+                    <p class=errorMsg><?=$errorPwd?></p>
+                <?php endif;?>
+                <label><b>Mot-de-passe</b></label>
+                <input type="password" placeholder="Entrer le mot de passe" id="userpwd" name="userpwd" required>
+
+                <input type="submit" id='connexionbtn' name='connexionbtn' class="connexionbtn" value="Connexion" >
+
+
+                <footer>Nouveau membre ? <a href="index.php?url=registration">Inscrivez-vous ici</a></footer>
+            </div>
+        </form>
+    </body>
+</html>
 </div>

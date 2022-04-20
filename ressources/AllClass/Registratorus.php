@@ -52,7 +52,8 @@ class Registratorus {
         $this->resultReturned = $this->pwdVerificator($userPwd) && $this->resultReturned ;
         // Same here with pwdCheck
         $this->resultReturned = $this->pwdCheckVerificator($userPwd, $userPwdCheck) && $this->resultReturned ;
-        
+        // Same here with mail
+        $this->resultReturned = $this->mailVerificator($userMail) && $this->resultReturned ;
         
         // If $resultReturned = FALSE, don't push.
         if($this -> resultReturned){
@@ -64,6 +65,7 @@ class Registratorus {
     {
         // If match is okay and userPseudo don't exist already, return TRUE; else return FALSE
         // and save the correct error message.
+        // TODO : Must send error message.
         $dataFinder = new DataFinder();
         if(preg_match(self::PATTERN_PSEUDO, $userPseudo)){
             if($dataFinder -> isThisPseudoAlreadyExist($userPseudo)){
@@ -103,13 +105,14 @@ class Registratorus {
 
     public function mailVerificator($userMail)
     {
+        $dataFinder = new DataFinder();
         // If the mail inserted have the correct pattern and don't already exist in the users database, return TRUE. 
         if (preg_match(self::PATTERN_MAIL, $userMail)){
             if($dataFinder -> isThisMailAlreadyExist($userMail)){
-                return TRUE;
-            } else {
                 $this -> registrationsErrors["mail"] = "Ce mail est déjà utilisé";
                 return FALSE;
+            } else {
+                return TRUE;
             }
         } else {
             $this -> registrationsErrors["mail"] = "Veuillez utiliser un mail valide";

@@ -10,6 +10,10 @@
                 <?php if($errorGeneral != NULL):?>
                     <p class=errorMsg><?=$errorGeneral?></p>
                 <?php endif;?>
+
+                <?php if($errorMail != NULL):?>
+                    <p class=errorMsg><?=$errorMail?></p>
+                <?php endif;?>
                 <label><b>Adresse mail</b></label>
                 <input type="text" placeholder="Entrez votre mail" id="usermail" name="usermail" required>
 

@@ -19,5 +19,6 @@ $errorGeneral = $registratorus -> registrationsErrors["general"];
 $errorPseudo = $registratorus -> registrationsErrors["pseudo"];
 $errorPwd = $registratorus -> registrationsErrors["pwd"];
 $errorPwdCheck = $registratorus -> registrationsErrors["pwdCheck"];
+$errorMail = $registratorus -> registrationsErrors["mail"];
 
 require_once "../app/views/registration.phtml";
