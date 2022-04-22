@@ -131,4 +131,6 @@ class Registratorus {
         $dataFinder = new DataFinder();
         $dataFinder -> pushNewUser($userName, $userMail, $userMdpHashed);
     }
+
+    // TODO : Send a validator mail
 }

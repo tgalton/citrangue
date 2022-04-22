@@ -106,14 +106,27 @@ class DataFinder {
 
     
     // We want a method to find anything by id and table name.
-    public function findUserByMail($userMail)
+    public function findUserIDByMail($userMail)
     {
         $co = $this -> pdo; 
-        $stmt = $co -> prepare("SELECT user_id, user_mdp FROM Users where mail_adress = :mail");
-        $result = $stmt -> execute([
+        $stmt = $co -> prepare("SELECT user_id FROM Users WHERE mail_adress = :mail");
+        $stmt -> execute([
             ":mail" => $userMail
         ]);
-        var_dump($result -> fetch());
-        return $result -> fetchAll();
+        $user = $stmt -> fetch();
+        return $user;
+    }
+
+    public function findAnythingInExchangeOfID($userID, $whatever)
+    {
+        // $whatever should be : user_name, inscription_date, language_id, mail_adress or user_mdp
+        $co = $this->getPDO();
+        $sql = "SELECT $whatever FROM Users WHERE user_id = :user_id" ;
+        $req = $co->prepare($sql);
+        $req->execute([
+            ":user_id" => $userID
+        ]);
+        
+        return $req->fetch();
     }
 }
