@@ -61,7 +61,6 @@ class DataFinder {
         // $stmt -> bindValue(':mail', $mail);
         // var_dump($stmt -> fetchAll());
         $user = $stmt -> rowCount();
-        var_dump($user);
 
 
         if($user>0)
@@ -111,9 +110,10 @@ class DataFinder {
     {
         $co = $this -> pdo; 
         $stmt = $co -> prepare("SELECT user_id, user_mdp FROM Users where mail_adress = :mail");
-        $stmt -> execute([
+        $result = $stmt -> execute([
             ":mail" => $userMail
         ]);
-        return $stmt;
+        var_dump($result -> fetch());
+        return $result -> fetchAll();
     }
 }

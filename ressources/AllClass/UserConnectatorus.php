@@ -30,17 +30,15 @@ class UserConnectatorus {
             $this -> resultReturned = FALSE;
         } else {
             $dataFinder = new DataFinder();
-            // var_dump($dataFinder -> isThisMailAlreadyExist($userMail));
-
-            // if($dataFinder -> isThisMailAlreadyExist($userMail)){
+            if($dataFinder -> isThisMailAlreadyExist($userMail)){
             //     // If it already exist, run further verification -> is it the right pwd ?
-            //     $result = findUserByMail($userMail);
-            //     var_dump($result);
-            // } else {
-            // // Else return error and false
-            // $this -> registrationsErrors["general"] = "Le mot de passe ou le mail est incorrect";
-            // $this -> resultReturned = FALSE;
-            // }
+                $result = $dataFinder-> findUserByMail($userMail);
+                
+            } else {
+            // Else return error and false
+            $this -> registrationsErrors["general"] = "Le mot de passe ou le mail est incorrect";
+            $this -> resultReturned = FALSE;
+            }
         }
     }
         
