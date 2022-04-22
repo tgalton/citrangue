@@ -21,4 +21,5 @@ $errorPwd = $registratorus -> registrationsErrors["pwd"];
 $errorPwdCheck = $registratorus -> registrationsErrors["pwdCheck"];
 $errorMail = $registratorus -> registrationsErrors["mail"];
 
+// TODO : use session to keep field when an error occure
 require_once "../app/views/registration.phtml";

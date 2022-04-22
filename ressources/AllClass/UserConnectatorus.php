@@ -53,7 +53,7 @@ class UserConnectatorus {
                     $pseudoBDD = $pseudoBDD -> user_name;
                     $_SESSION["userPseudo"] = $pseudoBDD;
                     $languageBDD = $dataFinder -> findAnythingInExchangeOfID($id, "language_id");
-                    $languageBDD = $languageBDD -> user_language;
+                    $languageBDD = $languageBDD -> language_id;
                     $_SESSION["languageID"] = $languageBDD;
 
                     $this -> resultReturned = TRUE;
@@ -69,6 +69,10 @@ class UserConnectatorus {
             $this -> registrationsErrors["general"] = "Le mot de passe ou le mail est incorrect";
             $this -> resultReturned = FALSE;
             }
+        }
+        if($this -> resultReturned === TRUE){
+            header("Location: index.php?url=class");
+            exit();
         }
     }
     // TODO : a method to send a mail when the user forgot is pwd.    
