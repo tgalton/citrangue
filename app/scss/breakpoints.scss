@@ -1,0 +1,24 @@
+
+// https://docs.microsoft.com/fr-fr/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design
+// As recommended, we only use mutiples of 4 for every blocs except texts. 
+
+//  /* Extra small devices (phones, 600px and down) */
+//  /* Small devices (portrait tablets and large phones, 600px and up) */
+//  /* Medium devices (landscape tablets, 768px and up) */
+//  /* Large devices (laptops/desktops, 992px and up) */
+//  /* Extra large devices (large laptops and desktops, 1200px and up) */
+
+// The method below is from :
+// https://css-tricks.com/approaches-media-queries-sass/
+$breakpoints: (extraSmall: 0px, 
+               small: 600px, 
+               medium: 768px,
+               large: 992px,
+               extra: 1200px) !default;
+
+// Examples to use this :
+@include media(">extraSmall", "<medium") {
+}
+
+@include media(">medium", "<950px") {
+}

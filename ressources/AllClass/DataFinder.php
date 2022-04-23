@@ -1,6 +1,5 @@
 <?php
-// On veut plus tard une class qui sait envoyer des données pour chaque table
-// en fonction du nom du model ou la méthode est utilisée.
+// This class is use to find data and push data about user inscription or connexion.
 
 namespace Services\AllClass;
 require_once "../ressources/config/rule.php";

@@ -1,0 +1,27 @@
+// Define grid for class
+.bodyClass{
+    display: grid;
+    @include media(">extraSmall", "<medium") {
+        grid-template-columns: 1fr;
+        // On phone : 20vh for nav, 50 for old class, 200 for current class, 
+        // 50 for futur class, 100vh for aside, 50vh for footer.
+        grid-template-rows: 20vh 50vh 200vh 50vh 100vh 50vh ;
+    }
+    @include media(">medium", "<large") {
+        // On tablette : 2fr for all except 1fr for aside. Nav on both.
+        grid-template-columns: 2fr 1fr;
+        // On tablette : 20vh for nav, 50 for old class, 200 for current class, 
+        // 50 for futur class, 50vh for footer.
+        grid-template-rows: 20vh 50vh 200vh 50vh 50vh ;
+    }
+    @include media(">large") {
+        // On computer : 4fr for all except 1fr for aside. Nav on both.
+        grid-template-columns: repeat(5, 1fr);
+        // On computer (same): 20vh for nav, 50 for old class, 200 for current class, 
+        // 50 for futur class, 50vh for footer.
+        grid-template-rows: 20vh 50vh 200vh 50vh 50vh ;
+    }
+    
+    gap: 2em;
+    justify-content: center;
+}

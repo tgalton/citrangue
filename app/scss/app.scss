@@ -1,1 +1,10 @@
+// First of all, we import variable and media query needed for all sheets style.
+@import "breakpoints";
+@import "var";
+
+// Then, we import the different sheets
 @import "registration";
+    // TODO : sheetstyle for connection.
+@import "class";
+    // TODO : sheetstyle for aside
+
