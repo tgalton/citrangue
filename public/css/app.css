@@ -1,88 +1,17 @@
-* {
-  box-sizing: border-box;
+/* Error: (color1: #10454F, color2: #506266, color3: #818274, color4: #A3AB78, color5: #BDE038) isn't a valid CSS value.
+ *     ,
+ * 102 |         color: $color;
+ *     |                ^^^^^^
+ *     '
+ *   app\scss\normalize.scss 102:10  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: (color1: #10454F, color2: #506266, color3: #818274, color4: #A3AB78, color5: #BDE038) isn't a valid CSS value.\a     \2577 \a 102 \2502          color: $color;\d\a     \2502                 ^^^^^^\a     \2575 \a   app\\scss\\normalize.scss 102:10  root stylesheet";
 }
-
-/* Add padding to containers */
-.container {
-  padding: 16px;
-  max-width: 1000px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Overwrite default styles of hr */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* Set a style for the submit/register button */
-.registerbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
-.registerbtn:hover {
-  opacity: 1;
-}
-
-/* Add a blue text color to links */
-a {
-  color: dodgerblue;
-}
-
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-  background-color: #f1f1f1;
-  text-align: center;
-}
-
-.errorMsg {
-  color: red;
-  font-weight: 500;
-}
-
-.bodyClass {
-  display: grid;
-  gap: 2em;
-  justify-content: center;
-}
-
-@media only screen and (min-width: 1024px) {
-  .bodyClass {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 20vh 50vh 200vh 50vh 100vh 50vh;
-  }
-
-  .classOld {
-    grid-column-start: 1;
-    grid-column-end: -1;
-    grid-row-start: 1;
-    grid-row-end: -1;
-    background-color: red;
-  }
-}
-
-/*# sourceMappingURL=app.css.map */
