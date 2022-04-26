@@ -1,27 +1,81 @@
-// Define grid for class
+.aside{
+    @include for_breakpoint(portrait) {
+        // background-color: rgb(255, 0, 238);
+    }
+    @include for_breakpoint(landscape) {
+        // background-color: rgb(255, 242, 0);
+    }
+    @include for_breakpoint(desktop) {
+        // background-color: rgb(0, 255, 85);
+    }
+    @include for_breakpoint(mobile) {
+        // background-color: red;
+    }
+    @include for_breakpoint(tablet) {
+        // background-color: rgb(68, 0, 255);
+    }
+}
+
+// Define grid for class, depend on media queries from breakpoints.scss
 .bodyClass{
     display: grid;
-    @include media(">extraSmall", "<medium") {
+    gap: 2em;
+    justify-content: center;
+}
+
+
+@include for_breakpoint(desktop) {
+    .bodyClass{
+        display: grid;
         grid-template-columns: 1fr;
         // On phone : 20vh for nav, 50 for old class, 200 for current class, 
         // 50 for futur class, 100vh for aside, 50vh for footer.
         grid-template-rows: 20vh 50vh 200vh 50vh 100vh 50vh ;
     }
-    @include media(">medium", "<large") {
-        // On tablette : 2fr for all except 1fr for aside. Nav on both.
-        grid-template-columns: 2fr 1fr;
-        // On tablette : 20vh for nav, 50 for old class, 200 for current class, 
-        // 50 for futur class, 50vh for footer.
-        grid-template-rows: 20vh 50vh 200vh 50vh 50vh ;
+    .classOld{
+        grid-column-start: 1;
+        grid-column-end: -1;
+        grid-row-start: 1;
+        grid-row-end: -1;
+        background-color: red;
     }
-    @include media(">large") {
-        // On computer : 4fr for all except 1fr for aside. Nav on both.
-        grid-template-columns: repeat(5, 1fr);
-        // On computer (same): 20vh for nav, 50 for old class, 200 for current class, 
-        // 50 for futur class, 50vh for footer.
-        grid-template-rows: 20vh 50vh 200vh 50vh 50vh ;
-    }
-    
-    gap: 2em;
-    justify-content: center;
 }
+        
+
+    // }
+    // @include media(">medium", "<large") {
+    //     .bodyClass{
+    //         display: grid;
+    //         // On tablette : 2fr for all except 1fr for aside. Nav on both.
+    //         grid-template-columns: 2fr 1fr;
+    //         // On tablette : 20vh for nav, 50 for old class, 200 for current class, 
+    //         // 50 for futur class, 50vh for footer.
+    //         grid-template-rows: 20vh 50vh 200vh 50vh 50vh ;
+    //     }
+    //     .classOld{
+    //         grid-area: 1,1,4,4;
+    //     }
+
+    // }
+    // @include media(">large") {
+    //     .bodyClass{
+    //         display: grid;
+    //         // On computer : 4fr for all except 1fr for aside. Nav on both.
+    //         grid-template-columns: repeat(5, 1fr);
+    //         // On computer (same): 20vh for nav, 50 for old class, 200 for current class, 
+    //         // 50 for futur class, 50vh for footer.
+    //         grid-template-rows: 20vh 50vh 200vh 50vh 50vh ;
+    //     }
+    //     .classOld{
+    //         grid-area: 1,1,4,4;
+    //     }
+
+        
+    // }
+// }
+
+
+// .classOld,
+// .classCurrent,
+// .classFuture{
+//     background-color: pink;

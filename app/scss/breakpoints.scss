@@ -1,4 +1,37 @@
 
+// Inspired by : https://stackoverflow.com/questions/36957904/media-queries-in-sass
+
+// /* Media Queries */ Not yet necessarily correct, edit these at will 
+$media_queries : (
+    // The three main sizes of screen
+    'mobile'    : unquote("only screen and (max-width: 667px)"),
+    'tablet'    : unquote("only screen and (max-width: 900px) and (min-width: 600px)"),
+    'desktop'   : unquote("only screen and (min-width: 1024px)"),
+    // The next ones won't be used in the first version of Citrangue but would be later.
+    'retina2'   : unquote("only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)"),
+    'retina3'   : unquote("only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)"),
+    'landscape' : unquote("screen and (orientation:landscape) "),    
+    'portrait'  : unquote("screen and (orientation:portrait) ")
+);
+
+@mixin for_breakpoint($breakpoints) {
+    $conditions : ();
+    @each $breakpoint in $breakpoints {
+        // If the key exists in the map
+        $conditions: append(
+            $conditions,
+            #{inspect(map-get($media_queries, $breakpoint))},
+            comma
+        );
+    }
+
+    @media #{$conditions} {
+        @content;
+    }
+}
+
+// We could use these recommendations later : 
+
 // https://docs.microsoft.com/fr-fr/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design
 // As recommended, we only use mutiples of 4 for every blocs except texts. 
 
@@ -8,17 +41,3 @@
 //  /* Large devices (laptops/desktops, 992px and up) */
 //  /* Extra large devices (large laptops and desktops, 1200px and up) */
 
-// The method below is from :
-// https://css-tricks.com/approaches-media-queries-sass/
-$breakpoints: (extraSmall: 0px, 
-               small: 600px, 
-               medium: 768px,
-               large: 992px,
-               extra: 1200px) !default;
-
-// Examples to use this :
-@include media(">extraSmall", "<medium") {
-}
-
-@include media(">medium", "<950px") {
-}

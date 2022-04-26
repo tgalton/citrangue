@@ -1,6 +1,8 @@
 // First of all, we import variable and media query needed for all sheets style.
 @import "breakpoints";
 @import "var";
+// Next, normalize
+@import "normalize";
 
 // Then, we import the different sheets
 @import "registration";

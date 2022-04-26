@@ -63,4 +63,26 @@ a {
   font-weight: 500;
 }
 
+.bodyClass {
+  display: grid;
+  gap: 2em;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .bodyClass {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20vh 50vh 200vh 50vh 100vh 50vh;
+  }
+
+  .classOld {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    grid-row-start: 1;
+    grid-row-end: -1;
+    background-color: red;
+  }
+}
+
 /*# sourceMappingURL=app.css.map */

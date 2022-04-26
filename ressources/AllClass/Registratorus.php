@@ -129,7 +129,10 @@ class Registratorus {
         $userMdpHashed = password_hash($userMdp, PASSWORD_BCRYPT, $options);
         // On utilise la méthode push est présente dans la class datafinder.
         $dataFinder = new DataFinder();
+        // Aftef push, redirection at the main board.
         $dataFinder -> pushNewUser($userName, $userMail, $userMdpHashed);
+        header("Location: index.php?url=class");
+            exit();
     }
 
     // TODO : Send a validator mail
