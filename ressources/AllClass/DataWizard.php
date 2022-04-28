@@ -6,7 +6,7 @@ require_once "../ressources/config/rule.php";
 
 use PDO;
 
- abstract class DataFinder {
+ abstract class DataWizard {
     public $pdo;
     use GetPDO;
 
