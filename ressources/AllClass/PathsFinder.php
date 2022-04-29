@@ -18,9 +18,11 @@ class PathsFinder
         $allPaths = [];
         $allNamesPaths = [];
         $allViews = scandir('../app/views');
+        // Cut .phtml from views name
         foreach($allViews as $oneView){
             array_push($allNamesPaths, substr_replace($oneView,"", -6));
         }
+        // add Controller.php
         foreach($allNamesPaths as $oneNamePath){
             $allPaths += [$oneNamePath => $oneNamePath."Controller.php"];
         }

@@ -1,8 +1,9 @@
 <?php
 namespace Services\AllClass;
+use PDO;
 require_once "../ressources/config/rule.php";
 
-use PDO;
+
 
 trait GetPDO {
     public function getPdo(): PDO

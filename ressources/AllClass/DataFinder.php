@@ -1,5 +1,6 @@
 <?php
 // This class is use to find data and push data about user inscription or connexion.
+// TODO : Must rename this class.
 
 namespace Services\AllClass;
 require_once "../ressources/config/rule.php";
@@ -104,7 +105,7 @@ class DataFinder {
     }
 
     
-    // We want a method to find anything by id and table name.
+    
     public function findUserIDByMail($userMail)
     {
         $co = $this -> pdo; 
@@ -115,7 +116,8 @@ class DataFinder {
         $user = $stmt -> fetch();
         return $user;
     }
-
+    
+    // We want a method to find anything by id and table name.
     public function findAnythingInExchangeOfID($userID, $whatever)
     {
         // $whatever should be : user_name, inscription_date, language_id, mail_adress or user_mdp
