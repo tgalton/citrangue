@@ -3,14 +3,14 @@
 namespace App\Models;
 use Services\AllClass\DataWizard ;
 
-class SubjectsMaster extends DataWizard 
+class UnitsMaster extends DataWizard 
 {
-    public $actualTable =  "SubjectsMaster"; 
-    public function addNewSubject($valueOfName)
+    public $actualTable =  "UnitsMaster"; 
+    public function addNewUnit($valueOfName)
     {
         // $whateverToInsert = columns of insertion : a name.
         // ID is not require because automatically generated.
-        $whateverToInsert = ("subject_name");
+        $whateverToInsert = ("unit_name");
         $table = $actualTable;
         $valuesToBind = $valueOfName;
         $result = $this -> insert(

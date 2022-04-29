@@ -12,7 +12,7 @@ class NotionsMaster extends DataWizard
         $whatever = "notion_id, LevelsMaster_level_id, UnitsMaster_unit_id, notion_name";
         $table = $this -> actualTable;
         $paramForSelection = "UnitsMaster_unit_id";
-        $request = $this -> getManyElements(
+        $result = $this -> getManyElements(
             $whatever,
             $table, 
             $paramForSelection, 
@@ -22,8 +22,7 @@ class NotionsMaster extends DataWizard
         // $table = database table where you search
         // $paramForSelection = column like user_id
         // $valueForSelection = value inside the column like 42  
-        return $request; 
+        return $result; 
     }
-    
 } 
 

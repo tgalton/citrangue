@@ -10,18 +10,10 @@ require_once "../ressources/config/rule.php";
     // GetPDO = trait , so need "use" 
     use GetPDO;
 
-    //Get one element in table
-    // TODO : change this method !!!
-     public function getOneElement(string $sqlRequest, array $bindParam=[]): mixed
-    {
-        $connect = $this->GetPDO();
-        $request = $connect->prepare($sqlRequest);
-        $request->execute($bindParam);
-        return $request->fetch();
-    }
     
-
-    //Get many elements in table
+    // ______________________________________
+    // ***** Get many elements in table *****
+    // --------------------------------------
      public function getManyElements($whatever, $table, $paramForSelection, $valueForSelection)
     {
         // Using GetPDO trait
@@ -38,19 +30,47 @@ require_once "../ressources/config/rule.php";
         return $request->fetchAll();
     }
 
-    // A working function inside Datafinder to inspire myself
-    // public function findAnythingInExchangeOfID($userID, $whatever)
-    // {
-    //     // $whatever should be : user_name, inscription_date, language_id, mail_adress or user_mdp
-    //     $co = $this->GetPDO();
-    //     $sql = "SELECT $whatever FROM Users WHERE user_id = :user_id" ;
-    //     $req = $co->prepare($sql);
-    //     $req->execute([
-    //         ":user_id" => $userID
-    //     ]);
-        
-    //     return $req->fetch();
-    // }
+    // ______________________________________
+    // ******* Insert element in table ******
+    // --------------------------------------
+    public function insert($whateverToInsert, $table, $valuesToBind)
+    {
+        // $whateverToInsert is an array of the columns where data will be push
+        // example : "$whateverToInsert = (user_name, mail_adress, user_mdp, language_id)"
+
+        // $valuesToBind is an array of data to push.
+
+        // to have prepared request we need also something like (:user_name, :mail_adress, :user_mdp, :language_id)
+        // that give something like : ("INSERT INTO Users (user_name, mail_adress, user_mdp, language_id) 
+    //     VALUES (:user_name, :mail_adress, :user_mdp, :language_id)")
+        $connect = $this -> GetPDO();
+        $whateverToInsertBinding = $whateverToInsert ;
+        foreach ($whateverToInsertBinding as &$oneThingToInsert) {
+            $oneThingToInsert = ":$oneThingToInsert" ;
+        }
+        $sqlRequest = ("INSERT INTO $table ($whateverToInsert) VALUES ($whateverToInsertBinding)");
+        $request = $connect->prepare($sqlRequest);
+        $i = 0;
+
+        // We use a foreach to produce something similare to :
+            // $user -> bindParam(":mail_adress", $usermail);
+            // $user -> bindParam(":user_mdp", $userMdp);
+        foreach ($whateverToInsertBinding as &$oneThingToInsert) {
+            $request -> bindParam($oneThingToInsert, $valuesToBind[$i]);
+            $i++;
+        }
+        $request -> execute();
+    }
+
+    //Get one element in table
+    // TODO : change this method !!!
+    public function getOneElement(string $sqlRequest, array $bindParam=[]): mixed
+    {
+        $connect = $this->GetPDO();
+        $request = $connect->prepare($sqlRequest);
+        $request->execute($bindParam);
+        return $request->fetch();
+    }
 
     
     //Get all elements in table
@@ -63,15 +83,7 @@ require_once "../ressources/config/rule.php";
         return $request->fetchAll();
     }
     
-    //Insert element in table
-    // TODO : change this method !!!
-     public function insert(string $sqlRequest,array $bindParam=[]): string|int
-    {
-        $connect = $this->GetPDO();
-        $request = $connect->prepare($sqlRequest);
-        $request->execute($bindParam);
-        return $connect->lastInsertId();
-    }
+
     
     //Update element in table
     // TODO : change this method !!!
