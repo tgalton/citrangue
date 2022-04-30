@@ -19,4 +19,10 @@ class UnitsMaster extends DataWizard
             $valuesToBind
         );
     }
+
+    public function returnAllUnits($whateverToBeSelected, $actualTable)
+    {
+        return $this -> getAll($whateverToBeSelected, $actualTable);
+    }
 }
+

@@ -30,6 +30,7 @@ require_once "../ressources/config/rule.php";
         return $request->fetchAll();
     }
 
+
     // ______________________________________
     // ******* Insert element in table ******
     // --------------------------------------
@@ -62,6 +63,19 @@ require_once "../ressources/config/rule.php";
         $request -> execute();
     }
 
+
+    //  ________________________________________
+    // |******* Get all elements in table ******|
+    //  ----------------------------------------
+    public function getAll($whateverToBeSelected, $tableName)
+    {
+        $connect = $this->GetPDO();
+        $request = $connect->prepare("SELECT $whateverToBeSelected FROM $tableName");
+        $request->execute();
+        return $request->fetchAll();
+    }
+
+
     //Get one element in table
     // TODO : change this method !!!
     public function getOneElement(string $sqlRequest, array $bindParam=[]): mixed
@@ -73,15 +87,7 @@ require_once "../ressources/config/rule.php";
     }
 
     
-    //Get all elements in table
-    // TODO : change this method !!!
-     public function getAll(string $tableName): array
-    {
-        $connect = $this->GetPDO();
-        $request = $connect->prepare("SELECT * FROM $tableName");
-        $request->execute();
-        return $request->fetchAll();
-    }
+
     
 
     
