@@ -20,8 +20,9 @@ class UnitsMaster extends DataWizard
         );
     }
 
-    public function returnAllUnits($whateverToBeSelected, $actualTable)
+    public function returnAllUnits($whateverToBeSelected)
     {
+        $actualTable = $this -> actualTable;
         return $this -> getAll($whateverToBeSelected, $actualTable);
     }
 }

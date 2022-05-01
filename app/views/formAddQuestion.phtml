@@ -8,6 +8,27 @@
         <label><b>Nom d'une nouvelle unité</b></label>
         <input type="text" placeholder="" id="newUnitName" name="newUnitName" required>
 
+        <?php if($errorExistingUnitName != NULL):?>
+            <p class=errorMsg><?=$errorCurrentUnitName?></p>
+        <?php endif;?>
+        <label><b>Nom d'une unité actuelle</b></label>
+        <select placeholder="" id="existingUnitName" name="existingUnitName">
+            <?php
+                echo $listOfExistingUnit;
+            ?>
+        </select>
+        <input type="submit" id='registerbtn' name='registerbtn' class="registerbtn" value="Ajouter nouvelle Unité" >
+        
+    </div>
+
+    <div>
+        <h3>Notions</h3>
+        <?php if($errorNewNotionName != NULL):?>
+            <p class=errorMsg><?=$errorNewNotionName?></p>
+        <?php endif;?>
+        <label><b>Nom d'une nouvelle unité</b></label>
+        <input type="text" placeholder="" id="newUnitName" name="newUnitName" required>
+
         <?php if($errorNewUnitName != NULL):?>
             <p class=errorMsg><?=$errorCurrentUnitName?></p>
         <?php endif;?>
@@ -17,15 +38,27 @@
                 echo $listOfExistingUnit;
             ?>
         </select>
-        
-    </div>
-
-    <div>
-        <h3>Notions</h3>
+        <input type="submit" id='registerbtn' name='registerbtn' class="registerbtn" value="Ajouter nouvelle Unité" >
     </div>
 
     <div>
         <h3>Unité</h3>
+        <?php if($errorNewUnitName != NULL):?>
+            <p class=errorMsg><?=$errorNewUnitName?></p>
+        <?php endif;?>
+        <label><b>Nom d'une nouvelle unité</b></label>
+        <input type="text" placeholder="" id="newUnitName" name="newUnitName" required>
+
+        <?php if($errorNewUnitName != NULL):?>
+            <p class=errorMsg><?=$errorCurrentUnitName?></p>
+        <?php endif;?>
+        <label><b>Nom d'une unité actuelle</b></label>
+        <select placeholder="" id="newUnitName" name="newUnitName">
+            <?php
+                echo $listOfExistingUnit;
+            ?>
+        </select>
+        <input type="submit" id='registerbtn' name='registerbtn' class="registerbtn" value="Ajouter nouvelle Unité" >
     </div>
 
 </form>
