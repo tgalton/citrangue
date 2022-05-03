@@ -15,5 +15,9 @@ foreach($existingUnits as &$existingUnit) {
     array_push($listOfExistingUnit, "<option value = $existingUnit> $existingUnit </option>");
 }
 
+// Unit return
+if($_POST["newUnitName"] != NULL){
+    
+}
 
 require_once '../app/views/formAddQuestion.phtml';

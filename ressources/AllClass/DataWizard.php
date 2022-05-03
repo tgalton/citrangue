@@ -76,21 +76,54 @@ require_once "../ressources/config/rule.php";
     }
 
 
-    //Get one element in table
-    // TODO : change this method !!!
-    public function getOneElement(string $sqlRequest, array $bindParam=[]): mixed
+    // ______________________________________
+    // ***** Get many elements in table *****
+    // --------------------------------------
+    public function getElement($whatever, $table, $paramForSelection, $valueForSelection)
     {
+        // Using GetPDO trait
         $connect = $this->GetPDO();
-        $request = $connect->prepare($sqlRequest);
-        $request->execute($bindParam);
+        // $whatever = what is search; example $whatever = "user_name, inscription_date"
+        // $table = database table where you search
+        // $paramForSelection = column like user_id
+        // $valueForSelection = value inside the column like 42
+        $sql = "SELECT $whatever FROM $table WHERE $paramForSelection = :$paramForSelection" ;
+        $request = $connect->prepare($sql);
+        $request->execute([
+            ":$paramForSelection" => $valueForSelection
+        ]);
         return $request->fetch();
     }
 
     
-
+    // ______________________________________
+    // ***** It exist ? *****
+    // --------------------------------------
+    public function itExist($table, $paramForSelection, $valueForSelection)
+    {
+        // Using GetPDO trait
+        $connect = $this->GetPDO();
+        // $whatever = what is search; example $whatever = "user_name, inscription_date"
+        // $table = database table where you search
+        // $paramForSelection = column like user_id
+        // $valueForSelection = value inside the column like 42
+        $sql = "SELECT * FROM $table WHERE $paramForSelection = :$paramForSelection" ;
+        $request = $connect->prepare($sql);
+        $request->execute([
+            ":$paramForSelection" => $valueForSelection
+        ]);
+        $result = $request -> rowCount();
+        if($result>0)
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
     
 
-    
     //Update element in table
     // TODO : change this method !!!
      public function updateElement(string $sqlRequest,array $bindParam=[]): void
