@@ -1,8 +1,13 @@
 
 <h2>Ajout de question</h2>
-<form action="" method="post">
-    <div>
+
+    <form action="" method="post">
+
         <h3>Unité</h3>
+        <?php if($errorGeneralUnitName != NULL):?>
+            <p class=errorMsg><?=$errorGeneralUnitName?></p>
+        <?php endif;?>
+        
         <?php if($errorNewUnitName != NULL):?>
             <p class=errorMsg><?=$errorNewUnitName?></p>
         <?php endif;?>
@@ -14,15 +19,18 @@
         <?php endif;?>
         <label><b>Nom d'une unité actuelle</b></label>
         <select placeholder="" id="existingUnitName" name="existingUnitName">
+            <option value = NULL></option>
             <?php
-                $listOfExistingUnit;
+                foreach($listOfExistingUnit as $oneUnit){
+                    echo($oneUnit);
+                };
             ?>
-        </select>
-        
-        
-    </div>
 
-    <div>
+        </select>
+        <input type="submit" id='registUnit' name='registUnit' class="registerbtn" value="Ajouter" >
+    </form>
+
+    <form action="" method="post">
         <h3>Notions</h3>
         <?php if($errorNewNotionName != NULL):?>
             <p class=errorMsg><?=$errorNewNotionName?></p>
@@ -39,10 +47,10 @@
                 echo $listOfExistingUnit;
             ?>
         </select>
-        
-    </div>
+        <input type="submit" id='registerbtn' name='registerbtn' class="registerbtn" value="Ajouter" >
+    </form>
 
-    <div>
+    <form action="" method="post">
         <h3>Question</h3>
         <?php if($errorNewUnitName != NULL):?>
             <p class=errorMsg><?=$errorNewUnitName?></p>
@@ -59,10 +67,10 @@
                 echo $listOfExistingUnit;
             ?>
         </select>
-        
-    </div>
+        <input type="submit" id='registerbtn' name='registerbtn' class="registerbtn" value="Ajouter" >
+    </form>
 
-    <input type="submit" id='registerbtn' name='registerbtn' class="registerbtn" value="Ajouter" >
+    
 
-</form>
+
 

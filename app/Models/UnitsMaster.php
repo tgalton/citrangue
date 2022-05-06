@@ -7,6 +7,12 @@ class UnitsMaster extends DataWizard
 {
     public CONST PATTERN_UNITNAME = "/^[a-zA-Z]+$/";
     public $actualTable =  "UnitsMaster"; 
+    public $unitRegistrationErrors = [
+        "general" => NULL,
+        "new" => NULL,
+        "current" => NULL,
+    ];
+
     public function addNewUnit($valueOfName)
     {
         // $whateverToInsert = columns of insertion : a name.
@@ -42,26 +48,22 @@ class UnitsMaster extends DataWizard
     {
         // If only one is set : push or search corresponding id.
         // If twice or none, give error.
-        $unitRegistrationErrors = [
-            "general" => NULL,
-            "new" => NULL,
-            "current" => NULL,
-        ];
+        var_dump("It live !");
         if($newName =! NULL) { 
             if($selectName =! NULL){
-                $unitRegistrationErrors["general"] = "Veuillez remplir un seul des deux champs.";
+                $this -> unitRegistrationErrors["general"] = "Veuillez remplir un seul des deux champs.";
             } else {
                 // In this case we may push a new unit.
                 // Must verify name of the new unit :
                 if(preg_match(self::PATTERN_UNITNAME, $newName)){
                     // Must verify if it not exist already.
                     if($itExist = itExist($this -> actualTable, "unit_name", $newName)){
-                        $unitRegistrationErrors["new"] = "Cette unité existe déjà.";
+                        $this -> unitRegistrationErrors["new"] = "Cette unité existe déjà.";
                     } else {
                     $this -> addNewUnit($newName);
                     }
                 } else {
-                    $unitRegistrationErrors["new"] = "Veuillez utiliser seulement les caractères [A-Z][a-z] et espace.";
+                    $this -> unitRegistrationErrors["new"] = "Veuillez utiliser seulement les caractères [A-Z][a-z] et espace.";
                 } 
             }
         }else{
@@ -69,7 +71,7 @@ class UnitsMaster extends DataWizard
                 return $this -> findUnit("unit_id", "unit_name", $selectName);
                 // In this case, we just need to return the ID of the selected unit.
             } else {
-                $unitRegistrationErrors["general"] = "Veuillez remplir au moins un des champs.";
+                $this -> unitRegistrationErrors["general"] = "Veuillez remplir au moins un des champs.";
             }
             
             

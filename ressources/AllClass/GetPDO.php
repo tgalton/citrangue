@@ -15,7 +15,7 @@ trait GetPDO {
                 'ec99b76eccf924f56e914edcbbcacbb9',
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                 ]);  
         } catch( PDOException $e) {
             echo 'merci de nous signaler le disfonctionnement';
