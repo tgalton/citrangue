@@ -1,34 +1,48 @@
 
 <h2>Ajout de question</h2>
 
+
+    
     <form action="" method="post">
 
         <h3>Unité</h3>
-        <?php if($errorGeneralUnitName != NULL):?>
+        <?php if($errorGeneralUnitName !== NULL):?>
             <p class=errorMsg><?=$errorGeneralUnitName?></p>
         <?php endif;?>
         
-        <?php if($errorNewUnitName != NULL):?>
+        <?php if($errorNewUnitName !== NULL):?>
             <p class=errorMsg><?=$errorNewUnitName?></p>
         <?php endif;?>
-        <label><b>Nom d'une nouvelle unité</b></label>
-        <input type="text" placeholder="" id="newUnitName" name="newUnitName" required>
-            
-        <?php if($errorExistingUnitName != NULL):?>
-            <p class=errorMsg><?=$errorCurrentUnitName?></p>
+
+        <?php if($frozenUnitID === NULL):?>
+            <label><b>Nom d'une nouvelle unité</b></label>
+            <input type="text" placeholder="" id="newUnitName" name="newUnitName">
         <?php endif;?>
-        <label><b>Nom d'une unité actuelle</b></label>
-        <select placeholder="" id="existingUnitName" name="existingUnitName">
+
+        <?php if($errorExistingUnitName === NULL):?>
+            <p class=errorMsg><?=$errorExistingUnitName?></p>
+        <?php endif;?>
+
+        <?php if($frozenUnitID === NULL):?>
+            <label><b>Nom d'une unité actuelle</b></label>
+            <select placeholder="" id="existingUnitName" name="existingUnitName">
             <option value = NULL></option>
             <?php
                 foreach($listOfExistingUnit as $oneUnit){
                     echo($oneUnit);
                 };
             ?>
-
         </select>
         <input type="submit" id='registUnit' name='registUnit' class="registerbtn" value="Ajouter" >
+        <?php endif;?>
+
+
+        <?php if($frozenUnitID ==! NULL):?>
+            <h3>Unité choisie : <?= $frozenUnitName?></h3>
+            <input type="submit" id='changeUnit' name='changeUnit' class="registerbtn" value = "Changer l'unité" >
+        <?php endif;?>
     </form>
+
 
     <form action="" method="post">
         <h3>Notions</h3>
@@ -42,10 +56,14 @@
             <p class=errorMsg><?=$errorCurrentUnitName?></p>
         <?php endif;?>
         <label><b>Nom d'une notion existante</b></label>
-        <select placeholder="" id="newUnitName" name="newUnitName">
+        <select placeholder="" id="existingUnitName" name="existingUnitName">
+            <option value = NULL></option>
             <?php
-                echo $listOfExistingUnit;
+                foreach($listOfExistingUnit as $oneUnit){
+                    echo($oneUnit);
+                };
             ?>
+
         </select>
         <input type="submit" id='registerbtn' name='registerbtn' class="registerbtn" value="Ajouter" >
     </form>

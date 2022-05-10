@@ -49,7 +49,12 @@ require_once "../ressources/config/rule.php";
         foreach ($whateverToInsertBinding as &$oneThingToInsert) {
             $oneThingToInsert = ":$oneThingToInsert" ;
         }
-        $sqlRequest = ("INSERT INTO $table ($whateverToInsert) VALUES ($whateverToInsertBinding)");
+        // Must transform those array into string to be used for prepared request
+        $whateverToInsertString = implode(",", $whateverToInsert);
+        $whateverToInsertBindingString = implode(",", $whateverToInsertBinding);
+    
+
+        $sqlRequest = ("INSERT INTO $table ($whateverToInsertString) VALUES ($whateverToInsertBindingString)");
         $request = $connect->prepare($sqlRequest);
         $i = 0;
 
