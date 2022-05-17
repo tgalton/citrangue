@@ -33,7 +33,7 @@ class UnitsMaster extends DataWizard
     }
 
     public function findUnit($whatever, $paramForSelection, $valueForSelection)
-    {
+    {   
         $table = $this ->actualTable;
         $result = $this -> getElement($whatever, $table, $paramForSelection, $valueForSelection);
         return($result["$whatever"]);

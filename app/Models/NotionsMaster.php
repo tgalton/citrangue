@@ -6,7 +6,28 @@ use Services\AllClass\DataWizard ;
 class NotionsMaster extends DataWizard 
 {
     public $actualTable =  "NotionsMaster"; 
-    public CONST PATTERN_NOTIONNAME = "/^[a-zA-Z]+$/";
+    public CONST PATTERN_NOTIONNAME = "/^[\p{L} -]{0,60}[0-9]{0,2}$/";
+    public $notionRegistrationErrors = [
+        "general" => NULL,
+        "new" => NULL,
+        "current" => NULL,
+    ];
+
+
+
+    public function notionsByUnitIDAndLvl($unitID, $lvlID)
+    {
+    $table = $this -> actualTable;
+    $connect = $this->GetPDO();
+    $sql = "SELECT * FROM $table WHERE UnitsMaster_unit_id = :UnitsMaster_unit_id AND LevelsMaster_level_id = :LevelsMaster_level_id" ;
+    $request = $connect->prepare($sql);
+    $request->execute([
+        ":UnitsMaster_unit_id" => $unitID,
+        ":LevelsMaster_level_id" => $lvlID
+    ]);
+    return $request->fetchAll();
+    return $result;
+    }
 
     public function notionsByUnitID($unitID)
     {
@@ -52,44 +73,41 @@ class NotionsMaster extends DataWizard
     }
 
 
+
     public function returnAllNotions($whateverToBeSelected)
     {
         $actualTable = $this -> actualTable;
         return $this -> getAll($whateverToBeSelected, $actualTable);
     }
 
-    public function notionFormProcessoring($newName, $selectName)
+    public function notionFormProcessoring($newNameNotion, $selectNameNotion)
     {
         // If only one is set : push or search corresponding id.
         // If twice or none, give error.
-        $notionRegistrationErrors = [
-            "general" => NULL,
-            "new" => NULL,
-            "current" => NULL,
-        ];
-        if($newName =! NULL) { 
-            if($selectName =! NULL){
-                $notionRegistrationErrors["general"] = "Veuillez remplir un seul des deux champs.";
+        
+        if($newNameNotion =! NULL) { 
+            if($selectNameNotion =! NULL){
+                $this -> notionRegistrationErrors["general"] = "Veuillez remplir un seul des deux champs.";
             } else {
                 // In this case we may push a new notion.
                 // Must verify name of the new notion :
-                if(preg_match(self::PATTERN_NOTIONNAME, $newName)){
+                if(preg_match(self::PATTERN_NOTIONNAME, $newNameNotion)){
                     // Must verify if it not exist already.
-                    if($itExist = itExist($this -> actualTable, "notion_name", $newName)){
-                        $notionRegistrationErrors["new"] = "Cette notioné existe déjà.";
+                    if($itExist = itExist($this -> actualTable, "notion_name", $newNameNotion)){
+                        $this -> notionRegistrationErrors["new"] = "Cette notion existe déjà.";
                     } else {
-                    $this -> addNewNotion($newName);
+                    $this -> addNewNotion($newNameNotion);
                     }
                 } else {
-                    $notionRegistrationErrors["new"] = "Veuillez utiliser seulement les caractères [A-Z][a-z] et espace.";
+                    $this -> notionRegistrationErrors["new"] = "Veuillez utiliser seulement les caractères [A-Z][a-z] et espace.";
                 } 
             }
         }else{
             if($selectName =! NULL){
-                return $this -> findNotion("notion_id", "notion_name", $selectName);
+                return $this -> findNotion("notion_id", "notion_name", $selectNameNotion);
                 // In this case, we just need to return the ID of the selected notion.
             } else {
-                $notionRegistrationErrors["general"] = "Veuillez remplir au moins un des champs.";
+                $this -> notionRegistrationErrors["general"] = "Veuillez remplir au moins un des champs.";
             } 
         }
     }
