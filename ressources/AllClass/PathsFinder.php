@@ -24,7 +24,7 @@ class PathsFinder
         }
         // add Controller.php
         foreach($allNamesPaths as $oneNamePath){
-            $allPaths += [$oneNamePath => $oneNamePath."Controller.php"];
+            $allPaths += [$oneNamePath => self::BASE_CONTROLLER.$oneNamePath."Controller.php"];
         }
         foreach($allPaths as $key=>$path)
         {
@@ -33,7 +33,9 @@ class PathsFinder
             };
         }
 
+        $allPaths += ["formAPI" => "app/API/formAPI.php"];
         $this->allowedPaths = $allPaths;
+        
     }
 
     public function router($pathFromUrl) {
@@ -43,7 +45,7 @@ class PathsFinder
             ob_start();
             
             
-            require_once '../'.self::BASE_CONTROLLER.$this->allowedPaths[$pathFromUrl] ;
+            require_once '../'.$this->allowedPaths[$pathFromUrl] ;
 
             
             $content = ob_get_clean();

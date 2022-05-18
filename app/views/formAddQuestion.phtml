@@ -3,86 +3,46 @@
     
     <!-- Form for Unit -->
     <form action="" method="post" id="unitForm">
-        <?php if($frozenUnitID === NULL):?>
+
             <h3>Unité</h3>
-        <?php endif;?>
 
         <?php if($errorGeneralUnitName !== NULL):?>
             <p class=errorMsg><?=$errorGeneralUnitName?></p>
         <?php endif;?>
-        
+
+        <!-- New unit -->
+
         <?php if($errorNewUnitName !== NULL):?>
             <p class=errorMsg><?=$errorNewUnitName?></p>
         <?php endif;?>
 
-        <!-- New unit -->
-        <?php if($frozenUnitID === NULL):?>
-            <label><b>Nom d'une nouvelle unité</b></label>
-            <input type="text" placeholder="" id="newUnitName" name="newUnitName">
-        <?php endif;?>
+        <label><b>Nom d'une nouvelle unité</b></label>
+        <input type="text" placeholder="" id="newUnitName" name="newUnitName">
+
 
         <?php if($errorExistingUnitName === NULL):?>
             <p class=errorMsg><?=$errorExistingUnitName?></p>
         <?php endif;?>
 
-        Selection Unit
-        <?php if($frozenUnitID === NULL):?>
-            <label><b>Nom d'une unité actuelle</b></label>
-            <select placeholder="" id="existingUnitName" name="existingUnitName">
-            <option value = NULL></option>
-            <?php
-                foreach($listOfExistingUnit as $oneUnit){
-                    echo($oneUnit);
-                };
-            ?>
-        </select>
-        <?php endif;?>
 
-        <?php if($frozenUnitID === NULL):?>
-            <label><b>Niveau de l'unité</b></label>
-            <input type="range" id="unitLvl" name="unitLvl" min="0" max="5">
-            <input type="submit" id='registUnit' name='registUnit' class="registerbtn" value="Ajouter" >
-            <p>Connaissance : <?= $lvlName?> </p>
-        <?php endif;?>
-
-        <?php if($frozenUnitID ==! NULL):?>
-            <br><h3>Unité choisie : <?= $frozenUnitName?></h3>
-            <br><h4>Niveau <?= $lvlName?></h4>
-            <input type="submit" id='changeUnit' name='changeUnit' class="registerbtn" value = "Changer l'unité" >
-        <?php endif;?>
-    </form>
-
-    <!-- Form for notion -->
-    <form action="" method="post">
-        <h3>Notions</h3>
-
-        <!-- New Notion -->
-        <?php if($errorNewNotionName != NULL):?>
-            <p class=errorMsg><?=$errorNewNotionName?></p>
-        <?php endif;?>
-
-        <label><b>Nom d'une nouvelle notion</b></label>
-        <input type="text" placeholder="" id="newNotionName" name="newNotionName">
-
-        
-        <?php if($errorNewNotionName != NULL):?>
-            <p class=errorMsg><?=$errorCurrentNotionName?></p>
-        <?php endif;?>
-
-        <!-- Notion selection -->
-        <label><b>Nom d'une notion existante</b></label>
-        <select placeholder="" id="existingNotionName" name="existingNotionName">
-            <option value = NULL></option>
-            <?php
-                foreach($listOfExistingNotions as $oneNotion){
-                    echo($oneUnit);
-                };
-            ?>
+        <label><b>Nom d'une unité actuelle</b></label>
+        <select placeholder="" id="existingUnitName" name="existingUnitName">
+        <option value = NULL></option>
+        <?php
+            foreach($listOfExistingUnit as $oneUnit){
+                echo($oneUnit);
+            };
+        ?>
         </select>
 
+        <label><b>Niveau de l'unité</b></label>
+        <input type="range" id="unitLvl" name="unitLvl" min="0" max="5">
 
-        <input type="submit" id='registNotion' name='registNotion' class="registerbtn" value="Ajouter" >
+        <input type="submit" id='registUnit' name='registUnit' class="registerbtn" value="Ajouter" >
+       
     </form>
+
+
 
 <script type="text/javascript" src="formQuestion.js"></script>
     

@@ -3,8 +3,6 @@
 // ****** UNIT SELECTION ****** //
 // We want to create a list of all options (Units) for a select
 use App\Models\UnitsMaster ;
-$frozenUnitID = NULL;
-$frozenUnitName = NULL;
 $unitsMaster = new UnitsMaster ;
 $existingUnits = $unitsMaster -> returnAllUnits("unit_name") ;
 $listOfExistingUnit = [] ;
@@ -15,25 +13,6 @@ foreach($existingUnits as &$existingUnit) {
     $i++;
 }
 
-
-// Validation 
-
-if (isset($_POST['registUnit'])){
-    $unitsMaster-> unitFormProcessoring(
-        $_POST["newUnitName"],
-        $_POST["existingUnitName"]
-    );
-    // if validation is push : freaze choice of Unit
-    $frozenUnitID = $unitsMaster -> frozenUnitID;
-    $frozenUnitName = $unitsMaster -> frozenUnitName;
-}
-
-if (isset($POST['changeUnit'])){
-    $frozenUnitID = NULL;
-    $frozenUnitName = NULL;
-    $unitsMaster -> frozenUnitID = NULL;
-    $unitsMaster -> frozenUnitName = NULL;
-}
 
 
 // Log errors for Units
@@ -56,19 +35,19 @@ if (isset($_POST['registUnit'])){
 // We create a list of notions depending on unit and lvl
 use App\Models\NotionsMaster ;
 $notionsMaster = new NotionsMaster;
-$existingNotionsByUnitID = $notionsMaster -> notionsByUnitIDAndLvl($frozenUnitID, $lvlID);
-$listOfExistingNotions = [] ;
-foreach($existingNotionsByUnitID as &$existingNotion) {
-    $option = $existingNotion['notion_name'];
-    array_push($listOfExistingUnit, "<option value = '$option'> '$option' </option>");
-}
+// $existingNotionsByUnitID = $notionsMaster -> notionsByUnitIDAndLvl($frozenUnitID, $lvlID);
+// $listOfExistingNotions = [] ;
+// foreach($existingNotionsByUnitID as &$existingNotion) {
+//     $option = $existingNotion['notion_name'];
+//     array_push($listOfExistingUnit, "<option value = '$option'> '$option' </option>");
+// }
 
-if (isset($_POST['registNotion'])){
-    $newNameNotion = $_POST['newNotionName'];
-    $selectNameNotion = $_POST['existingNotionName'];
-    $notionsMaster -> notionFormProcessoring(
-        $newNameNotion,
-        $selectNameNotion);
-}
+// if (isset($_POST['registNotion'])){
+//     $newNameNotion = $_POST['newNotionName'];
+//     $selectNameNotion = $_POST['existingNotionName'];
+//     $notionsMaster -> notionFormProcessoring(
+//         $newNameNotion,
+//         $selectNameNotion);
+// }
 
 require_once '../app/views/formAddQuestion.phtml';

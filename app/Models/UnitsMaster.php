@@ -14,8 +14,8 @@ class UnitsMaster extends DataWizard
         "current" => NULL,
     ];
     // FrozenId is used to fixed inside addformquestioncontroller the selected Unit.
-    public $frozenUnitID = NULL;
-    public $frozenUnitName = NULL;
+    // public $chosenUnitID = NULL;
+    // public $chosenUnitName = NULL;
 
     public function addNewUnit($valueOfName)
     {
@@ -52,6 +52,7 @@ class UnitsMaster extends DataWizard
 
     public function unitFormProcessoring($newName, $selectName)
     {
+        file_put_contents('test.txt', $newName);
         // If only one is set : push or search corresponding id.
         // If twice or none, give error.
 
@@ -69,8 +70,8 @@ class UnitsMaster extends DataWizard
                     } else {
                         
                     $this -> addNewUnit($newName);
-                    $this -> frozenUnitName = $newName;
-                    $this -> frozenUnitID = $this -> findUnit("unit_id", "unit_name", $newName);
+                    $this -> chosenUnitName = $newName;
+                    $this -> chosenUnitID = $this -> findUnit("unit_id", "unit_name", $newName);
                     }
                 } else {
                     $this -> unitRegistrationErrors["new"] = "Veuillez utiliser seulement les caractères [A-Z][a-z], accents et espaces. 60 caractères maximum. Peut finir par un nombre à deux chiffres.";
@@ -78,8 +79,8 @@ class UnitsMaster extends DataWizard
             }
         }else{
             if($selectName != "NULL"){
-                $this -> frozenUnitID = $this -> findUnit("unit_id", "unit_name", $selectName);
-                $this -> frozenUnitName = $selectName;
+                $this -> chosenUnitID = $this -> findUnit("unit_id", "unit_name", $selectName);
+                $this -> chosenUnitName = $selectName;
                 // In this case, we just need to return the ID of the selected unit.
             } else {
                 $this -> unitRegistrationErrors["general"] = "Veuillez remplir au moins un des champs.";
