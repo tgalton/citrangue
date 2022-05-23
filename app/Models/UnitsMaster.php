@@ -8,14 +8,14 @@ class UnitsMaster extends DataWizard
     // PATTERN_UNITNAME is a regex to accept or not new unitsnames
     public CONST PATTERN_UNITNAME = "/^[\p{L} -]{0,60}[0-9]{0,2}$/";
     public $actualTable =  "UnitsMaster"; 
+    public $chosenUnitName = NULL;
+    public $chosenUnitID = NULL;
     public $unitRegistrationErrors = [
         "general" => NULL,
         "new" => NULL,
         "current" => NULL,
     ];
-    // FrozenId is used to fixed inside addformquestioncontroller the selected Unit.
-    // public $chosenUnitID = NULL;
-    // public $chosenUnitName = NULL;
+
 
     public function addNewUnit($valueOfName)
     {

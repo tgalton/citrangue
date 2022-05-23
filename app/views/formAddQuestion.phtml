@@ -5,27 +5,28 @@
     <form action="" method="post" id="unitForm">
 
             <h3>Unité</h3>
-
+        <!-- General Error -->
         <?php if($errorGeneralUnitName !== NULL):?>
-            <p class=errorMsg><?=$errorGeneralUnitName?></p>
+            <p class="errorMsg" id="errorMsgGeneralUnit"><?=$errorGeneralUnitName?></p>
+        <?php endif;?>
+        <p value=""></p>
+
+        <!-- New unit : Error -->
+        <?php if($errorNewUnitName !== NULL):?>
+            <p class=errorMsg id="errorMsgNewUnit"><?=$errorNewUnitName?></p>
         <?php endif;?>
 
         <!-- New unit -->
-
-        <?php if($errorNewUnitName !== NULL):?>
-            <p class=errorMsg><?=$errorNewUnitName?></p>
-        <?php endif;?>
-
-        <label><b>Nom d'une nouvelle unité</b></label>
+        <label id = labelNewUnitName><b>Nom d'une nouvelle unité</b></label>
         <input type="text" placeholder="" id="newUnitName" name="newUnitName">
 
-
+        <!-- Current Unit Error -->
         <?php if($errorExistingUnitName === NULL):?>
-            <p class=errorMsg><?=$errorExistingUnitName?></p>
+            <p class=errorMsg id="errorMsgCurrentUnit"><?=$errorExistingUnitName?></p>
         <?php endif;?>
 
-
-        <label><b>Nom d'une unité actuelle</b></label>
+        <!-- Curent Unit Selection -->
+        <label id = labelExistingUnitName><b>Nom d'une unité actuelle</b></label>
         <select placeholder="" id="existingUnitName" name="existingUnitName">
         <option value = NULL></option>
         <?php
@@ -35,14 +36,18 @@
         ?>
         </select>
 
+        <!-- Level Unit -->
         <label><b>Niveau de l'unité</b></label>
         <input type="range" id="unitLvl" name="unitLvl" min="0" max="5">
 
+        <!-- Submit Unit -->
         <input type="submit" id='registUnit' name='registUnit' class="registerbtn" value="Ajouter" >
-       
+        <!-- Change Unit -->
+        <input type="submit" id='changeUnit' name='registUnit' class="registerbtn" value="Changer l'unité" hidden >
+
     </form>
 
-
+    <!-- Form for Notion -->
 
 <script type="text/javascript" src="formQuestion.js"></script>
     
