@@ -79,6 +79,5 @@ changeUnit.addEventListener("click", function(e){
 
 // Form -> NOTION
 document.registNotion.addEventListener("submit", function(e){
-
-}
-    
+ console.log();
+})
