@@ -8,7 +8,9 @@ let labelNewUnitName = document.getElementById("labelNewUnitName") ;
 let registUnit = document.getElementById("registUnit") ;
 let changeUnit = document.getElementById("changeUnit") ;
 let errorUnitMsgFromJS = document.getElementById("errorUnitMsgFromJS") ;
-var response ;
+let registNotion = document.getElementById("registNotion") ;
+let existingNotionName = document.getElementById("existingNotionName") ;
+let response ;
 
 document.getElementById("unitForm").addEventListener("submit", function(e){
     // Stop the refresh when submit
@@ -35,6 +37,7 @@ document.getElementById("unitForm").addEventListener("submit", function(e){
         if(response["errorGeneralUnitName"] === null && 
         response["errorNewUnitName"] === null && 
         response["errorExistingUnitName"] === null){
+            // If Unit is OK -> freeze selection.
             newUnitName.setAttribute("placeholder", response["chosenUnitName"]);
             newUnitName.setAttribute("disabled", "");
             existingUnitName.setAttribute("hidden", "");
@@ -44,6 +47,13 @@ document.getElementById("unitForm").addEventListener("submit", function(e){
             registUnit.setAttribute("hidden", "");
             changeUnit.removeAttribute("hidden");
             changeUnit.style.backgroundColor = "blue";
+            // Should add notion corresponding to Unit's ID selected.
+            let availableNotions = response["availableNotions"] ;
+            for(let i = 0; i< availableNotions.lenght; i++) {
+                var option = document.createElement("option");
+                option.text = availableNotions[i-1];
+                existingNotionName.add(option, existingNotionName[i-1]);
+            }
         } else {
             errorUnitMsgFromJS.setAttribute("value", "");
             errorUnitMsgFromJS.innerHTML = response["errorGeneralUnitName"]+"   "+
@@ -64,8 +74,11 @@ changeUnit.addEventListener("click", function(e){
     labelNewUnitName.innerHTML = "Nom d'une nouvelle unité";
     registUnit.removeAttribute("hidden");
     changeUnit.setAttribute("hidden", "");
+    // Disable avaibles notions
 });
 
 // Form -> NOTION
+document.registNotion.addEventListener("submit", function(e){
 
+}
     

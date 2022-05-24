@@ -18,19 +18,31 @@ $unitsMaster-> unitFormProcessoring(
     $existingUnitName
 );
 
-$errorGeneralUnitName = $unitsMaster -> unitRegistrationErrors["general"];
-$errorNewUnitName = $unitsMaster -> unitRegistrationErrors["new"];
-$errorExistingUnitName = $unitsMaster -> unitRegistrationErrors["current"];
+$errorGeneralUnitName = $unitsMaster -> unitRegistrationErrors["general"] ;
+$errorNewUnitName = $unitsMaster -> unitRegistrationErrors["new"] ;
+$errorExistingUnitName = $unitsMaster -> unitRegistrationErrors["current"] ;
 
-$chosenUnitID = $unitsMaster -> chosenUnitID;
-$chosenUnitName = $unitsMaster -> chosenUnitName;
+$chosenUnitID = $unitsMaster -> chosenUnitID ;
+$chosenUnitName = $unitsMaster -> chosenUnitName ; 
+// Must find all the corresponding Notions.
+// It depend also on Level ID -> need to convert unitLvl into lvlID
+use App\Models\LevelMaster ;
+$levelMaster = new LevelMaster ;
+$levelId = $levelMaster -> findLevelIdByNumber($unitLvl) ;
+console.log($levelId) ;
+
+use App\Models\NotionsMaster ;
+$notionsMaster = new NotionsMaster ;
+$availablesNotions = $notionsMaster -> notionsByUnitIDAndLvl ($chosenUnitID, $levelId) ;
+console.log($availablesNotions) ;
 
 $res = [
     "errorGeneralUnitName" => $errorGeneralUnitName,
     "errorNewUnitName" => $errorNewUnitName,
     "errorExistingUnitName" => $errorExistingUnitName,
     "chosenUnitID" => $chosenUnitID,
-    "chosenUnitName" => $chosenUnitName
+    "chosenUnitName" => $chosenUnitName,
+    "availableNotions" => $availablesNotions
 ];
 
 echo json_encode($res);

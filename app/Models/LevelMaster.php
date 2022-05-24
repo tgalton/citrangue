@@ -13,8 +13,10 @@ class LevelMaster extends DataWizard
     }
 
 
-    public function findLevel($whatever, $paramForSelection, $valueForSelection)
+    public function findLevelIdByNumber($valueForSelection)
     {   
+    $whatever = "level_id";
+    $paramForSelection = "level_name";
     $table = $this ->actualTable;
     $result = $this -> getElement($whatever, $table, $paramForSelection, $valueForSelection);
     return($result["$whatever"]);
