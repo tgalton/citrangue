@@ -56,7 +56,7 @@ class UnitsMaster extends DataWizard
         // If only one is set : push or search corresponding id.
         // If twice or none, give error.
 
-        if($newName != NULL) { 
+        if($newName ==! NULL) { 
             if($selectName != "NULL"){
                 $this -> unitRegistrationErrors["general"] = "Veuillez remplir un seul des deux champs.";
             } else {

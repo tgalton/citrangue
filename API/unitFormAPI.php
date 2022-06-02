@@ -29,12 +29,12 @@ $chosenUnitName = $unitsMaster -> chosenUnitName ;
 use App\Models\LevelMaster ;
 $levelMaster = new LevelMaster ;
 $levelId = $levelMaster -> findLevelIdByNumber($unitLvl) ;
-console.log($levelId) ;
+
 
 use App\Models\NotionsMaster ;
 $notionsMaster = new NotionsMaster ;
-$availablesNotions = $notionsMaster -> notionsByUnitIDAndLvl ($chosenUnitID, $levelId) ;
-console.log($availablesNotions) ;
+$availablesNotions = $notionsMaster -> notionsByUnitIDAndLvl ($chosenUnitID, $levelId["level_id"]) ;
+// echo var_dump($availablesNotions) ;
 
 $res = [
     "errorGeneralUnitName" => $errorGeneralUnitName,
@@ -42,9 +42,10 @@ $res = [
     "errorExistingUnitName" => $errorExistingUnitName,
     "chosenUnitID" => $chosenUnitID,
     "chosenUnitName" => $chosenUnitName,
-    "availableNotions" => $availablesNotions
+    "availableNotions" => $availablesNotions,
+    "lvlId" => $levelId
 ];
 
 echo json_encode($res);
-// echo json_encode($unitLvl);
+
 
