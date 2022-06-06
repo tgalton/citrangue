@@ -19,8 +19,8 @@ $path = $_GET["url"] ?? $pathsMaster::DEFAULT_PATH;
 
 $content = $pathsMaster->router($path);
 
-error_reporting(E_ALL);
-ini_set("display_error", 1);
+// error_reporting(E_ALL);
+// ini_set("display_error", 1);
 // phpinfo();
 
 // Absolument necessaire de require le layout à la fin

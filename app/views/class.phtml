@@ -13,7 +13,21 @@
     </div>
     <div class="classCurrent" id="classCurrent">
         <h3>Cours actuels</h3>
+        
+        <div class="categoryClassCurrent">
+            <?php foreach($existingUnits as &$existingUnit): ?>
+                <div class = "containerClass">
+                    <div class="cercle">
+                        <a href= <?= "index.php?url=exercice?id=".$existingUnit['unit_name']  ?> class = "linkClass">
+                            <img class="pictureClass", src="../app/pictures/classPictures/book.png" alt="">
+                        </a>
+                    </div>
+                    <p class= "textClass"> <?=$existingUnit['unit_name'] ; ?> </p>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
+
     <div class="classFuture">
         <h3>Futurs cours</h3>
     </div>

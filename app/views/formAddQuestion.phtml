@@ -2,7 +2,7 @@
 <h2>Edition de question</h2>
     
     <!-- Form for Unit -->
-    <form action="" method="post" id="unitForm">
+    <form action="" method="post" id="unitForm" name="unitForm">
 
         <h3>Choix d'Unité</h3>
         <!-- General Error -->
@@ -22,6 +22,10 @@
         <!-- New unit -->
         <label id = labelNewUnitName><b>Nom d'une nouvelle unité</b></label>
         <input type="text" placeholder="" id="newUnitName" name="newUnitName">
+
+        <!-- Image for new Unit -->
+        <label for="imageUnit" id="lableImageUnit">Image pour une nouvelle unité</label>
+        <input type="file" name="inpFile" id =inpFile accept = "image/png, image/jpg"> <br>
 
         <!-- Current Unit Error -->
         <?php if($errorExistingUnitName === NULL):?>

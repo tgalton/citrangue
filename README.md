@@ -1,5 +1,7 @@
 # citrangue
 
+Réglages
+    Dans le dossier (futur) php.ini, file_uploads = On pour permettre l'upload d'image
 
 Choix techniques
     AllClass

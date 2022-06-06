@@ -1,6 +1,7 @@
 
 // Form -> UNITS
 // let most of html elements
+let unitForm = document.getElementById("unitForm") ;
 let newUnitName = document.getElementById("newUnitName") ;
 let existingUnitName = document.getElementById("existingUnitName") ;
 let labelExistingUnitName = document.getElementById("labelExistingUnitName") ;
@@ -12,11 +13,50 @@ let errorUnitMsgFromJS = document.getElementById("errorUnitMsgFromJS") ;
 let existingNotionName = document.getElementById("existingNotionName") ;
 let saveUnitID = document.getElementById("saveUnitID") ;
 let saveLvlID = document.getElementById("saveLvlID") ;
+const inpFile = document.getElementById("inpFile") ;
+let uploadedImage = "" ;
 let response ;
 
 document.getElementById("unitForm").addEventListener("submit", function(e){
     // Stop the refresh when submit
     e.preventDefault();
+
+    //Request for ImageUnit 
+    // const formData = new FormData(unitForm);
+    // console.log(formData) ;
+    // formData.append("file", inpFile.files[0]);
+    // console.log(inpFile.files[0]) ;
+    
+
+    // const lastModified = inpFile.files[0]["lastModified"] ;
+    // const name = inpFile.files[0]["name"] ;
+    // const size = inpFile.files[0]["size"] ;
+    // const type = inpFile.files[0]["type"] ;
+    // const webkitRelativePath = inpFile.files[0]["webkitRelativePath"] ;
+
+    // // formData.append("inpFile", inpFile.files[0]) ;
+    // let myRequest = new Request("../API/uploadImage.php", {
+    //     method  : 'POST',
+    //     body : JSON.stringify({
+    //         lastModified : lastModified, 
+    //         name : name,
+    //         size : size,
+    //         type : type,
+    //         webkitRelativePath: webkitRelativePath
+    //     })
+    // })
+    // fetch(myRequest) ;
+
+
+    
+    // fetch(endpoint, {
+    //     method : "post",
+    //     body: formData
+    // }).catch(console.error);
+
+
+
+    // Request for Unit
     let txtnewNameUnit = document.querySelector("#newUnitName").value ;
     let selectExistingUnitName = document.querySelector("#existingUnitName").value ;
     let lvl = document.querySelector("#unitLvl").value ;
@@ -54,11 +94,9 @@ document.getElementById("unitForm").addEventListener("submit", function(e){
 
             // Should add notion corresponding to Unit's ID selected.
             let availableNotions = response["availableNotions"] ;
-            console.log(availableNotions) ;
-            console.log(availableNotions.length) ;
             for (let i = 0; i < availableNotions.length; i++) {
                 let opt = document.createElement("option");
-                console.log(availableNotions[i]["notion_id"]);
+                // console.log(availableNotions[i]["notion_id"]);
                 opt.value = availableNotions[i]["notion_name"];
                 opt.text = availableNotions[i]["notion_name"];
                 existingNotionName.add(opt, null);
@@ -211,7 +249,7 @@ document.getElementById("questionForm").addEventListener("submit", function(e){
     // Function to send data for answers
     function fetchOneAnswer(txtNewAnswer, isCorrect) {
         let QuestionID = saveQuestionID.value ;
-        console.log(txtNewAnswer, isCorrect, QuestionID) ;
+        // console.log(txtNewAnswer, isCorrect, QuestionID) ;
         let myRequestForAnswer = new Request("../API/answerFormAPI.php", {
             method  : 'POST',
             // data Answer

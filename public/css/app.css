@@ -268,7 +268,7 @@ hr {
 
 /* Set a style for the submit/register button */
 .registerbtn {
-  background-color: #04AA6D;
+  background-color: #0491aa;
   color: white;
   padding: 16px 20px;
   margin: 8px 0;
@@ -393,6 +393,101 @@ a {
   .nav {
     grid-area: 1/1/2/-1;
   }
+}
+.categoryClassCurrent {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.containerClass {
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50px;
+  border: 1vh;
+  border-color: black;
+}
+
+.pictureClass {
+  width: 10px;
+}
+
+.containerClass {
+  width: 10vw;
+  height: 10vw;
+  margin: 1em;
+  margin-top: 2em;
+}
+
+.pictureClass {
+  position: relative;
+  clip-path: ellipse(50% 50%);
+  height: 100%;
+  width: 100%;
+  object-position: center;
+}
+
+.cercle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1vw solid rgb(255, 114, 114);
+  border-radius: 100%;
+  padding: 0.5vw;
+}
+
+.linkClass {
+  width: 7vw;
+  height: 7vw;
+}
+
+.textClass {
+  margin-top: 4px;
+}
+
+.mascotte {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.containerClass {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+  height: 10vw;
+  text-align: center;
+  margin: 1em;
+  margin-top: 2em;
+}
+
+.pictureClass {
+  position: relative;
+  clip-path: ellipse(50% 50%);
+  height: 100%;
+  width: 100%;
+  object-position: center;
+}
+
+.cercle {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1vw solid rgb(255, 114, 114);
+  border-radius: 100%;
+  padding: 0.5vw;
+}
+
+.linkClass {
+  width: 7vw;
+  height: 7vw;
+}
+
+.textClass {
+  margin-top: 4px;
 }
 
 /*# sourceMappingURL=app.css.map */

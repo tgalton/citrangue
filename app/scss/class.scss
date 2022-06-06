@@ -98,6 +98,8 @@
     }
 }
 
+
+
 // @include for_breakpoint(portrait) {
 // }
 // @include for_breakpoint(landscape) {
@@ -121,3 +123,80 @@
 //         // background-color: rgb(68, 0, 255);
 //     }
 // }
+
+
+//  Class box
+// .classCurrent{
+
+// }
+.categoryClassCurrent{
+    display : flex;
+    // flex-direction: column;
+    justify-content: center;
+    // gap: 2vw;
+    flex-wrap: wrap ;
+
+
+}
+
+.containerClass{
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50px;
+    border : 1vh;
+    border-color: black;
+    // display : flex;
+    // justify-content: center;
+    // gap: 2vw;
+    // flex-wrap: wrap ;
+}
+
+
+.pictureClass {
+    width: 10px;
+}
+
+.containerClass{
+    // display: flex;    
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    width: 10vw;
+    height: 10vw;
+    margin : 1em;
+    margin-top: 2em;
+
+}
+
+.pictureClass{
+    position : relative ;
+    clip-path:ellipse(50% 50%);
+    height: 100%;
+    width: 100%;
+    object-position : center;
+    // margin : auto;
+    // margin-top: auto;
+    // margin-bottom: auto;
+
+}
+
+.cercle { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // height: 10vw; 
+    // width: 10vw;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1vw solid rgb(255, 114, 114);
+    border-radius: 100%; 
+    padding : 0.5vw;
+} 
+
+.linkClass {
+    width: 7vw;
+    height: 7vw;
+}
+
+.textClass {
+    margin-top: 4px;
+}
