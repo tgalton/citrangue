@@ -66,4 +66,23 @@ class QuestionsMaster extends DataWizard
             "La question est trop longue. 600 caractères maximum autorisé." ;
         }
     }
+
+    public function findQuestionIdByNotionId($notionId)
+    {
+        $valueForSelection = $notionId;
+        $whatever = "question_id, notion_id, question_type_id, is_illustrated, complexity_id, question_text";
+        $table = $this -> actualTable;
+        $paramForSelection = "notion_id";
+        $result = $this -> getManyElements(
+            $whatever,
+            $table, 
+            $paramForSelection, 
+            $valueForSelection
+        );
+        // $whatever = what is search; example $whatever = "user_name, inscription_date"
+        // $table = database table where you search
+        // $paramForSelection = column like user_id
+        // $valueForSelection = value inside the column like 42  
+        return $result;        
+    }
 }

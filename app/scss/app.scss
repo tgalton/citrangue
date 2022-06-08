@@ -10,48 +10,6 @@
 @import "class";
     // sheetstyle for aside
 @import "aside";
+    //  sheetstyle for exercice
+@import "exercice";
 
-.containerClass{
-    display: flex;    
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 10vw;
-    height: 10vw;
-    text-align: center;
-    margin : 1em;
-    margin-top: 2em;
-
-}
-
-.pictureClass{
-    position : relative ;
-    clip-path:ellipse(50% 50%);
-    height: 100%;
-    width: 100%;
-    object-position : center;
-    // margin : auto;
-    // margin-top: auto;
-    // margin-bottom: auto;
-
-}
-
-.cercle { 
-    display: flex;
-    align-items: center;
-    // height: 10vw; 
-    // width: 10vw;
-    background-color: rgba(255, 255, 255, 0);
-    border: 1vw solid rgb(255, 114, 114);
-    border-radius: 100%; 
-    padding : 0.5vw;
-} 
-
-.linkClass {
-    width: 7vw;
-    height: 7vw;
-}
-
-.textClass {
-    margin-top: 4px;
-}

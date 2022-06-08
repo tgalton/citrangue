@@ -53,6 +53,25 @@ class PossibleAnswersMaster extends DataWizard
         }
     }
 
+    public function findAnswerByQuestionId($questionId)
+    {
+        $valueForSelection = $questionId;
+        $whatever = "possible_answer_id, answer_text, is_correct_answer";
+        $table = $this -> actualTable;
+        $paramForSelection = "question_id";
+        $result = $this -> getManyElements(
+            $whatever,
+            $table, 
+            $paramForSelection, 
+            $valueForSelection
+        );
+        // $whatever = what is search; example $whatever = "user_name, inscription_date"
+        // $table = database table where you search
+        // $paramForSelection = column like user_id
+        // $valueForSelection = value inside the column like 42  
+        return $result;        
+    }
+
 
 
 }
