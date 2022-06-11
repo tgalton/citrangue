@@ -15,7 +15,7 @@
             <?php foreach($existingUnits as &$existingUnit): ?>
                 <div class = "containerClass">
                     <div class="cercle">
-                        <a href="index.php?url=exercice&amp;name=<?php htmlspecialchars($existingUnit['unit_name']);?>"  class = "linkClass">
+                        <a href="index.php?url=exercice&amp;name=<?=$existingUnit['unit_name'];?>"  class = "linkClass">
                             <img class="pictureClass", src="../app/pictures/classPictures/book.png" alt="">
                         </a>
                     </div>
