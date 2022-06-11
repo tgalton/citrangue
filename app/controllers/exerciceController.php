@@ -96,19 +96,20 @@ $finalSelectionOfQuestionLenght = count($finalSelectionOfQuestion) ;
 for($i=0 ; $i < $finalSelectionOfQuestionLenght; $i++){
     $oneQuestionId = $finalSelectionOfQuestion[$i]["question_id"] ;
     $temporaryArray = $possibleAnswersMaster -> findAnswerByQuestionId($oneQuestionId) ;
-    $temporaryArray["answer0"] = $temporaryArray[0] ;
-    $temporaryArray["answer1"] = $temporaryArray[1] ;
-    $temporaryArray["answer2"] = $temporaryArray[2] ;
-    $temporaryArray["answer3"] = $temporaryArray[3] ;
-    unset($temporaryArray[0]) ;
-    unset($temporaryArray[1]) ;
-    unset($temporaryArray[2]) ;
-    unset($temporaryArray[3]) ;
+    // $temporaryArray["answer0"] = $temporaryArray[0] ;
+    // $temporaryArray["answer1"] = $temporaryArray[1] ;
+    // $temporaryArray["answer2"] = $temporaryArray[2] ;
+    // $temporaryArray["answer3"] = $temporaryArray[3] ;
+    // unset($temporaryArray[0]) ;
+    // unset($temporaryArray[1]) ;
+    // unset($temporaryArray[2]) ;
+    // unset($temporaryArray[3]) ;
+    // var_dump($temporaryArray);
     $finalSelectionOfQuestion[$i] = array_merge($finalSelectionOfQuestion[$i], $temporaryArray);
+    // var_dump($finalSelectionOfQuestion[$i]);
 }
-var_dump($finalSelectionOfQuestion) ;
-
-// Put those questions into 20 html elements. All hidden (view)
+// var_dump($finalSelectionOfQuestion) ;
+$php_data = $finalSelectionOfQuestion ;
 
 
 require_once "../app/views/exercice.phtml";

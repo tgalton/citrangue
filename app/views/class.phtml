@@ -1,8 +1,5 @@
 <body class="bodyClass">
     
-
-    <h2>Cours</h2>
-
     <?php
     // Aside must be visible here. Nav also.
     require_once "../app/controllers/navController.php";
@@ -18,13 +15,16 @@
             <?php foreach($existingUnits as &$existingUnit): ?>
                 <div class = "containerClass">
                     <div class="cercle">
-                        <a href="index.php?url=exercice&amp;name=<?=$existingUnit['unit_name'];?>"  class = "linkClass">
+                        <a href="index.php?url=exercice&amp;name=<?php htmlspecialchars($existingUnit['unit_name']);?>"  class = "linkClass">
                             <img class="pictureClass", src="../app/pictures/classPictures/book.png" alt="">
                         </a>
                     </div>
                     <p class= "textClass"> <?=$existingUnit['unit_name'] ; ?> </p>
                 </div>
             <?php endforeach; ?>
+        </div>
+        <div class="align">
+            <p></p>
         </div>
     </div>
 

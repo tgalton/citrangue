@@ -1,4 +1,15 @@
 
+// test of validation animation.
+// window.onload = function() {
+//     Swal.fire({
+//         // position: 'top-end',
+//         icon: 'success',
+//         title: 'Votre question est enregistrée',
+//         showConfirmButton: false,
+//         timer: 1500
+//     })
+// }
+
 // Form -> UNITS
 // let most of html elements
 let unitForm = document.getElementById("unitForm") ;
@@ -140,7 +151,7 @@ let labelExistingNotionName = document.getElementById("labelExistingNotionName")
 let registNotion = document.getElementById("registNotion") ;
 let changeNotion = document.getElementById("changeNotion") ;
 let errorNotionMsgFromJS = document.getElementById("errorNotionMsgFromJS") ;
-let saveNotionID = document.querySelector('#saveQuestionID') ;
+let saveNotionID = document.querySelector('#saveNotionID') ;
 // let registNotion = document.querySelector("registNotion") ;
 
 
@@ -203,7 +214,7 @@ document.getElementById("notionForm").addEventListener("submit", function(e){
 
 // Form -> Question & Answers
 // let txtNewQuestion = document.getElementById("txtNewQuestion") ;
-let saveQuestionID = document.getElementById("saveQuestionID") ;
+let saveNewQuestionID = document.getElementById("saveNewQuestionID") ;
 let timeRequire = document.getElementById("timeRequire") ;
 let errorQuestionMsgFromJS = document.getElementById("errorQuestionMsgFromJS") ;
 
@@ -220,6 +231,42 @@ document.getElementById("questionForm").addEventListener("submit", function(e){
     let illustrated = 0;
     let timeRequireAmount = timeRequire.value ;
     let txtNewQuestion = document.getElementById("txtNewQuestion").value ;
+
+    // Send data for the answers.
+    // Answer 1 :
+    let txtAnswer1 = document.getElementById("txtAnswer1").value ;
+    let isItTrue1 = document.getElementById("isItTrue1").value ;
+    // Answer 2 :
+    let txtAnswer2 = document.getElementById("txtAnswer2").value ;
+    let isItTrue2 = document.getElementById("isItTrue2").value ;
+    // Answer 3 :
+    let txtAnswer3 = document.getElementById("txtAnswer3").value ;
+    let isItTrue3 = document.getElementById("isItTrue3").value ;
+    // Answer 4 :
+    let txtAnswer4 = document.getElementById("txtAnswer4").value ;
+    let isItTrue4 = document.getElementById("isItTrue4").value ;
+
+    // Function to send data for answers
+    function fetchOneAnswer(txtNewAnswer, isCorrect, QuestionID) {
+        // let QuestionID = saveQuestionID.value ;
+        // console.log(txtNewAnswer, isCorrect, QuestionID) ;
+        let myRequestForAnswer = new Request("../API/answerFormAPI.php", {
+            method  : 'POST',
+            // data Answer
+            body : JSON.stringify({
+                txtNewAnswer : txtNewAnswer,
+                isCorrect : isCorrect,
+                QuestionID : QuestionID
+            })
+        })
+        fetch(myRequestForAnswer)
+        .then(res => res.text())
+        .then(res => {
+            console.log(res) ;
+            response = JSON.parse(res) ;
+        });
+    }
+
     // let lvl = document.querySelector("#unitLvl").value ;
     let myRequestForQuestion = new Request("../API/questionFormAPI.php", {
         method  : 'POST',
@@ -237,8 +284,29 @@ document.getElementById("questionForm").addEventListener("submit", function(e){
     .then(res => {
         response = JSON.parse(res) ;
         if(response["errorQuestionText"] === null){
-            document.querySelector('#saveQuestionID').value = response["questionID"]
-            saveQuestionID.value = response["questionID"] ;
+            // Animated validation
+            Swal.fire({
+                // position: 'top-end',
+                icon: 'success',
+                title: 'Votre question est enregistrée',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            // Emptying field => currently not working
+            txtAnswer1.innerHTML = null ;
+            txtAnswer2.innerHTML = null ;
+            txtAnswer3.innerHTML = null ;
+            txtAnswer4.innerHTML = null ;
+            txtAnswer1.textContent = null ;
+            txtAnswer2.textContent = null ;
+            txtAnswer3.textContent = null ;
+            txtAnswer4.textContent = null ;
+            txtAnswer1.value = null ;
+            txtAnswer2.value = null ;
+            txtAnswer3.value = null ;
+            txtAnswer4.value = null ; 
+
+            return response["newQuestionID"] ;
         } else {
             errorQuestionMsgFromJS.removeAttribute("hidden");
             errorQuestionMsgFromJS.innerHTML = response["errorQuestionText"];
@@ -246,44 +314,24 @@ document.getElementById("questionForm").addEventListener("submit", function(e){
     })
 
 
-    // Function to send data for answers
-    function fetchOneAnswer(txtNewAnswer, isCorrect) {
-        let QuestionID = saveQuestionID.value ;
-        // console.log(txtNewAnswer, isCorrect, QuestionID) ;
-        let myRequestForAnswer = new Request("../API/answerFormAPI.php", {
-            method  : 'POST',
-            // data Answer
-            body : JSON.stringify({
-                txtNewAnswer : txtNewAnswer,
-                isCorrect : isCorrect,
-                QuestionID : QuestionID
-            })
-        })
-        fetch(myRequestForAnswer)
-        .then(res => res.text())
-        .then(res => {
-            response = JSON.parse(res) ;
-        });
-    }
+    .then(res => {
+        // Answer 1 :
+        fetchOneAnswer(txtAnswer1, isItTrue1, res)
+        // .then(res => res.text())
+        // .then(res => {
+        //     response = JSON.parse(res) ;
+        //     if(response["textAnswerError"] === null)
+        //     {
+        //     }
+        // });
+        // Answer 2 :
+        fetchOneAnswer(txtAnswer2, isItTrue2, res); 
+        // Answer 3 :
+        fetchOneAnswer(txtAnswer3, isItTrue3, res);
+        // Answer 4 :
+        fetchOneAnswer(txtAnswer4, isItTrue4, res);
+    })
+    .then(
 
-    // Send data for the answers.
-    // Answer 1 :
-    let txtAnswer1 = document.getElementById("txtAnswer1").value ;
-    let isItTrue1 = document.getElementById("isItTrue1").value ;
-    fetchOneAnswer(txtAnswer1, isItTrue1) ;
-    // Answer 2 :
-    let txtAnswer2 = document.getElementById("txtAnswer2").value ;
-    let isItTrue2 = document.getElementById("isItTrue2").value ;
-    fetchOneAnswer(txtAnswer2, isItTrue2) ;
-    // Answer 3 :
-    let txtAnswer3 = document.getElementById("txtAnswer3").value ;
-    let isItTrue3 = document.getElementById("isItTrue3").value ;
-    fetchOneAnswer(txtAnswer3, isItTrue3) ;
-    // Answer 4 :
-    let txtAnswer4 = document.getElementById("txtAnswer4").value ;
-    let isItTrue4 = document.getElementById("isItTrue4").value ;
-    fetchOneAnswer(txtAnswer4, isItTrue4) ;
-
-
-
+    )
 });

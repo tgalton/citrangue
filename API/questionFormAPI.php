@@ -31,9 +31,8 @@ $questionID = $questionsMaster -> questionID ;
 
 $res = [
     "errorQuestionText" => $errorQuestionText,
-    "questionID" => $questionID,
+    "newQuestionID" => $questionID,
 ];
-
 
 echo json_encode($res);
 

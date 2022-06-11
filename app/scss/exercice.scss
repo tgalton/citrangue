@@ -6,9 +6,9 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-body{
-    background: #007bff;
-}
+// body{
+//     background: #007bff;
+// }
 ::selection{
     color: #fff;
     background: #007bff;
@@ -44,7 +44,7 @@ body{
     cursor: pointer;
 }
 .info_box{
-    width: 540px;
+    width: 700px;
     background: #fff;
     border-radius: 5px;
     transform: translate(-50%, -50%) scale(0.9);

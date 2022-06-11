@@ -4,12 +4,23 @@
 // Next, normalize
 @import "normalize";
 
+//  sheetstyle for exercice
+@import "exercice";
 // Then, we import the different sheets
 @import "registration";
-    // TODO : sheetstyle for connection.
+// TODO : sheetstyle for connection.
 @import "class";
-    // sheetstyle for aside
+// sheetstyle for aside
 @import "aside";
-    //  sheetstyle for exercice
-@import "exercice";
+// 
+@import "nav";
+
+
+h1, h2{
+    text-align: center;
+    margin: 1em;
+}
+p{
+    text-align: center; 
+}
 

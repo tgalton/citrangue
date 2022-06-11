@@ -46,7 +46,7 @@ class PossibleAnswersMaster extends DataWizard
                 $isCorrectValue, 
                 $questionID
             );
-            $this -> answerID = findAnswerIDbyTxt($answerTextValue) ;
+            $this -> answerID = $this -> findAnswerIDbyTxtAndIsCorrect($answerTextValue, $isCorrectValue) ;
         } else {
             $this -> questionRegistrationErrors["textAnswer"] =
             "La réponse est trop longue. 1020 caractères maximum autorisé." ;
@@ -72,6 +72,22 @@ class PossibleAnswersMaster extends DataWizard
         return $result;        
     }
 
+    public function findAnswerIDbyTxtAndIsCorrect($answerTextValue, $isCorrectValue)
+    {   
+        
+        $table = $this -> actualTable;
+        $connect = $this->GetPDO();
+        $sql = "SELECT possible_answer_id FROM $table WHERE answer_text = :answer_text
+        AND is_correct_answer = :is_correct_answer" ;
+        $request = $connect->prepare($sql);
+        $request->execute([
+            ":answer_text" => $answerTextValue,
+            ":is_correct_answer" => $isCorrectValue
+        ]);
+        return $request->fetch();
+        
+
+    }
 
 
 }

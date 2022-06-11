@@ -1,0 +1,41 @@
+.navPictures{
+    display: block;
+    max-height: 15vh;
+    max-width: 15vw;
+    margin: 1vh 0vh;
+    width: auto;
+    height: auto;
+    transition: 0.5s;
+}
+
+.navPictures:hover{
+    max-height: 16vh;
+    max-width: 16vw;
+}
+
+.nav{
+    display: flex;
+    justify-content: space-around;
+    max-width: 100%;
+}
+
+.logo{
+    position: relative;
+    max-height: 25vh;
+    max-width: 25vw;
+    z-index: 5;
+    top: -1.5vw;
+}
+
+@include for_breakpoint(tablet) {
+ .book2,
+ .avatar{
+    visibility: collapse;
+ }
+}
+
+@include for_breakpoint(mobile) {
+    .navPictures:not(.logo){
+       visibility: collapse;
+    }
+   }
