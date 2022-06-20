@@ -1,5 +1,6 @@
 console.log(js_data) ;
 let questions = [] ;
+
 for(let i = 0 ; i < js_data.length ; i++){
     let answer = null
     for(let j = 0; j<4 ; j++){
@@ -17,7 +18,6 @@ for(let i = 0 ; i < js_data.length ; i++){
 }
     
 
-console.log(questions)
 
 //selecting all required elements
 const start_btn = document.querySelector(".start_btn button");

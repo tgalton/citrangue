@@ -3,6 +3,7 @@
 <script src="sweetalert2.all.min.js"></script>
 
 <h2>Edition de question</h2>
+<div class="container">
     
     <!-- Form for Unit -->
     <form action="" method="post" id="unitForm" name="unitForm">
@@ -15,26 +16,26 @@
         <p value=""></p>
         <!-- Error from JS script -->
         <p class="errorMsg" id="errorUnitMsgFromJS" hidden></p>
-
-
+        
+        
         <!-- New unit : Error -->
         <?php if($errorNewUnitName !== NULL):?>
             <p class=errorMsg id="errorMsgNewUnit"><?=$errorNewUnitName?></p>
         <?php endif;?>
-
+        
         <!-- New unit -->
         <label id = labelNewUnitName><b>Nom d'une nouvelle unité</b></label>
         <input type="text" placeholder="" id="newUnitName" name="newUnitName">
-
+        
         <!-- Image for new Unit -->
         <label for="imageUnit" id="lableImageUnit">Image pour une nouvelle unité</label>
         <input type="file" name="inpFile" id =inpFile accept = "image/png, image/jpg"> <br>
-
+        
         <!-- Current Unit Error -->
         <?php if($errorExistingUnitName === NULL):?>
             <p class=errorMsg id="errorMsgCurrentUnit"><?=$errorExistingUnitName?></p>
         <?php endif;?>
-
+        
         <!-- Current Unit Selection -->
         <label id = labelExistingUnitName><b>Nom d'une unité actuelle</b></label>
         <select placeholder="" id="existingUnitName" name="existingUnitName">
@@ -47,69 +48,69 @@
         </select>
         <!-- Unit ID save (use to save ID for js script) -->
         <p hidden id="saveUnitID" value="NULL" ></p>
-
+        
         <!-- Level Unit -->
         <label><b>Niveau de l'unité</b></label>
         <input type="range" id="unitLvl" name="unitLvl" min="0" max="5">
         <!-- Level ID save (use to save ID for js script) -->
         <p hidden id="saveLvlID" value="NULL" ></p>
-
+        
         <!-- Submit Unit -->
         <input type="submit" id='registUnit' name='registUnit' class="registerbtn" value="Ajouter unité" >
         <!-- Change Unit -->
         <input type="submit" id='changeUnit' name='registUnit' class="registerbtn" value="Changer l'unité" hidden >
-
+        
     </form>
-
-
+        
+        
     <!-- Form for Notion -->
     <form action="" id="notionForm">
-
+        
         <h3>Choix de notion</h2>
-
+        
         <!-- Error from JS script -->
         <p class="errorMsg" id="errorNotionMsgFromJS" hidden></p>
-
+        
         <!-- New Notion Name -->
         <label id = "labelNewNotionName"><b>Nom d'une nouvelle notion</b></label>
         <input type="text" placeholder="" id="newNotionName" name="newNotionName">
-
+        
         <!-- Curent Notion Selection -->
         <label id = "labelExistingNotionName"><b>Nom d'une notion actuelle</b></label>
         <select placeholder="Veuillez choisir une unité d'abord" id="existingNotionName" name="existingNotionName">
         <option value = "N/A" ></option>
-
+        
         <!-- Submit Notion -->
         <input type="submit" id='registNotion' name='registNotion' class="registerbtn" value="Ajouter notion" >
         
         <!-- Change Notion -->
         <input type="submit" id='changeNotion' name='changeNotion' class="registerbtn" value="Changer la notion" hidden >
-
+        
         <!-- Notion ID save (use to save ID for js script) -->
         <p hidden id="saveNotionID" value="NULL" ></p>
     </form>
-
+        
     <form action="" id="questionForm">
         <h3>Ajout de question</h2>
-
+        
         <!-- Error text question -->
         <p class="errorMsg" id="errorQuestionMsgFromJS" hidden><p>
-
+        
         <!-- Save question ID -->
         <p id="saveNewQuestionID" value="NULL" hidden>question ID</p>
-
+        
         <!-- Add text question -->
         <label for="txtNewQuestion" id="labelTxtNewQuestion">Ecrivez votre nouvelle question</label>
         <textarea  placeholder="" id="txtNewQuestion" name="txtNewQuestion"></textarea>
-
+        
         <!-- timeRequire -->
         <label for="timeRequire" id="labeltimeRequire">Quel est le temps nécessaire ?</label>
         <select id="timeRequire" name="timeRequire">
         <option value = 30 >30 secondes</option>
         <option value = 60 >60 secondes</option>
-
-    
-
+        
+        
+        
         <!-- Add response 1 -->
         <label for="txtAnswer1" id="labeltxtAnswer1">Ecrivez votre première réponse</label>
         <textarea  placeholder="" id="txtAnswer1" name="txtAnswer1"></textarea>
@@ -117,7 +118,7 @@
         <select placeholder="Est-ce la bonne réponse ?" id="isItTrue1" name="isItTrue1">
         <option value = 0 >Non</option>
         <option value = 1 >Oui</option>
-
+        
         <!-- Add response 2 -->
         <label for="txtAnswer2" id="labeltxtAnswer2">Ecrivez votre deuxième réponse</label>
         <textarea  placeholder="" id="txtAnswer2" name="txtAnswer2"></textarea>
@@ -125,7 +126,7 @@
         <select placeholder="Est-ce la bonne réponse ?" id="isItTrue2" name="isItTrue2">
         <option value = 0 >Non</option>
         <option value = 1 >Oui</option>
-
+        
         <!-- Add response 3 -->
         <label for="txtAnswer3" id="labeltxtAnswer3">Ecrivez votre troisième réponse</label>
         <textarea  placeholder="" id="txtAnswer3" name="txtAnswer3"></textarea>
@@ -133,8 +134,8 @@
         <select id="isItTrue3" name="isItTrue3">
         <option value = 0 >Non</option>
         <option value = 1 >Oui</option>
-
-
+        
+        
         <!-- Add response 1 -->
         <label for="txtAnswer4" id="labeltxtAnswer4">Ecrivez votre quatrième réponse</label>
         <textarea  placeholder="" id="txtAnswer4" name="txtAnswer4"></textarea>
@@ -142,12 +143,12 @@
         <select  id="isItTrue4" name="isItTrue4">
         <option value = 0 >Non</option>
         <option value = 1 >Oui</option>
+        
+</div>        
 
 
-
-
-        <!-- Submit question and answers -->
-        <input type="submit" id='registQuestion' name='registNotion' class="registerbtn" value="Ajouter la question et ses réponses" >
+            <!-- Submit question and answers -->
+            <input type="submit" id='registQuestion' name='registNotion' class="registerbtn" value="Ajouter la question et ses réponses" >
 
 
         <script type="text/javascript" src="js/formQuestion.js"></script>
