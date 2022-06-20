@@ -34,9 +34,9 @@ for($i = 0 ; $i < $lenghtNotionArray ; $i++){
         $questionArray[$k]['question_id'] = $temporaryArray[$j]['question_id'] ;
         $questionArray[$k]['notion_id'] = $temporaryArray[$j]['notion_id'] ;
         $questionArray[$k]['question_type_id'] = $temporaryArray[$j]['question_type_id'] ;
-        $questionArray[$k]['is_illustrated'] = $temporaryArray[$j]['is_illustrated'] ;
+        $questionArray[$k]['is_illustrated'] = htmlspecialchars($temporaryArray[$j]['is_illustrated']) ;
         $questionArray[$k]['complexity_id'] = $temporaryArray[$j]['complexity_id'] ;
-        $questionArray[$k]['question_text'] = $temporaryArray[$j]['question_text'] ;
+        $questionArray[$k]['question_text'] = htmlspecialchars($temporaryArray[$j]['question_text']) ;
         $k++ ;
     }
 }
@@ -96,6 +96,11 @@ $finalSelectionOfQuestionLenght = count($finalSelectionOfQuestion) ;
 for($i=0 ; $i < $finalSelectionOfQuestionLenght; $i++){
     $oneQuestionId = $finalSelectionOfQuestion[$i]["question_id"] ;
     $temporaryArray = $possibleAnswersMaster -> findAnswerByQuestionId($oneQuestionId) ;
+
+    for($g = 0 ; $g<3 ; $g++){
+        $temporaryArray[$g]['answer_text'] = htmlspecialchars($temporaryArray[$g]['answer_text']) ;
+    }
+    
     // $temporaryArray["answer0"] = $temporaryArray[0] ;
     // $temporaryArray["answer1"] = $temporaryArray[1] ;
     // $temporaryArray["answer2"] = $temporaryArray[2] ;

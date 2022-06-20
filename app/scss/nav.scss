@@ -29,7 +29,8 @@
 
 @include for_breakpoint(tablet) {
  .book2,
- .avatar{
+ .avatar,
+ .booklink{
     visibility: collapse;
  }
 }
